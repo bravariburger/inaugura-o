@@ -583,10 +583,10 @@
     </main>
 
     <!-- Floating Cart Button -->
-    <div id="floating-cart" class="fixed bottom-4 right-4 z-50 hidden">
-        <button onclick="openCart()" class="bg-brand-red text-white p-4 rounded-full shadow-lg flex items-center space-x-2">
-            <span>🛒</span>
-            <span id="cart-count" class="bg-brand-yellow text-black px-2 py-1 rounded-full text-sm font-bold">0</span>
+    <div id="floating-cart" class="fixed bottom-4 left-4 right-4 z-50 hidden">
+        <button onclick="openCart()" class="w-full bg-brand-red text-white py-4 px-6 rounded-full shadow-lg flex items-center justify-center space-x-2 font-semibold">
+            <span>Finalizar Pedido</span>
+            <span id="cart-count" class="bg-brand-yellow text-black px-3 py-1 rounded-full text-sm font-bold">0</span>
         </button>
     </div>
 
@@ -939,6 +939,31 @@
     </div>
 
     <script>
+        /*
+        ========================================
+        CONTROLE DE ESTOQUE - INSTRUÇÕES
+        ========================================
+        
+        Para alterar o estoque de qualquer produto, procure o produto na lista 'products' abaixo
+        e altere o valor da propriedade 'stock':
+        
+        Exemplo:
+        'cheddar-burger-1': {
+            name: '🍔 Cheddar Burguer',
+            price: 19.90,
+            description: '...',
+            image: '...',
+            category: 'burger',
+            stock: 10  ← ALTERE ESTE NÚMERO
+        }
+        
+        - stock: 0 = Produto indisponível (aparece como "ESGOTADO")
+        - stock: 1-3 = Estoque baixo (aparece quantidade restante)
+        - stock: 4+ = Estoque normal
+        
+        ========================================
+        */
+        
         let cart = [];
         let currentProduct = null;
         let quantity = 1;
@@ -950,91 +975,104 @@
                 price: 19.90,
                 description: 'Delicioso burger com queijo cheddar derretido, alface, tomate e molho especial',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Burguer.jpg?raw=true',
-                category: 'burger'
+                category: 'burger',
+                stock: 10
             },
             'cheddar-bacon-burger-2': {
                 name: '🍔 Cheddar Bacon Burguer',
                 price: 19.90,
                 description: 'Burger com cheddar cremoso e bacon crocante, alface, tomate e molho especial',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Bacon%20Burguer.jpg?raw=true',
-                category: 'burger'
+                category: 'burger',
+                stock: 8
             },
             'bravari-burger-3': {
                 name: '🍔 Bravari Burguer',
                 price: 19.90,
                 description: 'Nosso burger especial da casa com ingredientes selecionados',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Bravari%20Burguer.jpg?raw=true',
-                category: 'burger'
+                category: 'burger',
+                stock: 5
             },
             'cheddar-duplo-4': {
                 name: '🍔 Cheddar Burguer Duplo',
                 price: 19.90,
                 description: 'Dupla dose de sabor com cheddar cremoso',
                 image: null,
-                category: 'burger'
+                category: 'burger',
+                stock: 0
             },
             'cheddar-bacon-duplo-5': {
                 name: '🍔 Cheddar Bacon Burguer Duplo',
                 price: 19.90,
                 description: 'Duplo prazer com cheddar e bacon crocante',
                 image: null,
-                category: 'burger'
+                category: 'burger',
+                stock: 3
             },
             'bravari-duplo-6': {
                 name: '🍔 Bravari Burguer Duplo',
                 price: 19.90,
                 description: 'Versão dupla do nosso especial da casa',
                 image: null,
-                category: 'burger'
+                category: 'burger',
+                stock: 7
             },
             'bravari-bacon-triplo-7': {
                 name: '🍔 Bravari Bacon Triplo',
                 price: 19.90,
                 description: 'Tripla dose de sabor com bacon crocante',
                 image: null,
-                category: 'burger'
+                category: 'burger',
+                stock: 2
             },
             'bravari-ring-triplo-8': {
                 name: '🍔 Bravari Ring Triplo',
                 price: 19.90,
                 description: 'Triplo burger com onion rings crocantes',
                 image: null,
-                category: 'burger'
+                category: 'burger',
+                stock: 4
             },
             'bravari-ring-9': {
                 name: '🍔 Bravari Burguer Ring',
                 price: 19.90,
                 description: 'Burger especial com onion rings',
                 image: null,
-                category: 'burger'
+                category: 'burger',
+                stock: 6
             },
             'vulcan-burger-10': {
                 name: '🍔 Vulcan Burguer',
                 price: 19.90,
                 description: 'Burger picante para os corajosos',
                 image: null,
-                category: 'burger'
+                category: 'burger',
+                stock: 1
             },
             'cream-cheese-11': {
                 name: '🍔 Cream Cheese Burguer',
                 price: 19.90,
                 description: 'Burger cremoso com cream cheese',
                 image: null,
-                category: 'burger'
+                category: 'burger',
+                stock: 9
             },
             'bravari-salada-12': {
                 name: '🍔 Bravari Salada',
                 price: 19.90,
                 description: 'Opção saudável com salada fresca',
                 image: null,
-                category: 'burger'
+                category: 'burger',
+                stock: 12
             },
             'cheddar-triplo-13': {
                 name: '🍔 Cheddar Burguer Triplo',
                 price: 19.90,
                 description: 'Tripla dose de cheddar cremoso',
                 image: null,
-                category: 'burger'
+                category: 'burger',
+                stock: 0
             },
             
             // Sobremesas
@@ -1043,28 +1081,32 @@
                 price: 19.90,
                 description: 'Brownie cremoso de chocolate com pedaços de chocolate',
                 image: null,
-                category: 'sobremesa'
+                category: 'sobremesa',
+                stock: 15
             },
             'brownie-branco': {
                 name: '🍫 Brownie Chocolate Branco',
                 price: 19.90,
                 description: 'Brownie de chocolate branco cremoso',
                 image: 'https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true',
-                category: 'sobremesa'
+                category: 'sobremesa',
+                stock: 8
             },
             'brownie-nutella': {
                 name: '🍫 Brownie Nutella',
                 price: 19.90,
                 description: 'Brownie com recheio cremoso de Nutella',
                 image: null,
-                category: 'sobremesa'
+                category: 'sobremesa',
+                stock: 0
             },
             'brownie-morango': {
                 name: '🍫 Brownie Morango',
                 price: 19.90,
                 description: 'Brownie com cobertura de morango fresco',
                 image: null,
-                category: 'sobremesa'
+                category: 'sobremesa',
+                stock: 6
             },
             
             // Acompanhamentos
@@ -1073,21 +1115,24 @@
                 price: 19.90,
                 description: 'Porção pequena de batata frita crocante',
                 image: 'https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true',
-                category: 'acompanhamento'
+                category: 'acompanhamento',
+                stock: 20
             },
             'batata-m': {
                 name: '🍟 Batata Frita M',
                 price: 19.90,
                 description: 'Porção média de batata frita crocante',
                 image: null,
-                category: 'acompanhamento'
+                category: 'acompanhamento',
+                stock: 15
             },
             'batata-g': {
                 name: '🍟 Batata Frita G',
                 price: 19.90,
                 description: 'Porção grande de batata frita crocante',
                 image: 'https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true',
-                category: 'acompanhamento'
+                category: 'acompanhamento',
+                stock: 10
             },
             
             // Bebidas
@@ -1096,21 +1141,24 @@
                 price: 19.90,
                 description: 'Refrigerante Coca Cola gelado',
                 image: null,
-                category: 'bebida'
+                category: 'bebida',
+                stock: 25
             },
             'coca-zero': {
                 name: 'Coca Cola Zero 350ml',
                 price: 19.90,
                 description: 'Refrigerante Coca Cola Zero gelado',
                 image: 'https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true',
-                category: 'bebida'
+                category: 'bebida',
+                stock: 18
             },
             'guarana-antartica': {
                 name: 'Guaraná Antártica 350ml',
                 price: 19.90,
                 description: 'Refrigerante Guaraná Antártica gelado',
                 image: 'https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true',
-                category: 'bebida'
+                category: 'bebida',
+                stock: 22
             },
             
             // Combos
@@ -1119,91 +1167,104 @@
                 price: 19.90,
                 description: 'Cheddar Burguer + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Cheddar%20Burguer.jpg?raw=true',
-                category: 'combo'
+                category: 'combo',
+                stock: 12
             },
             'combo-cheddar-bacon-2': {
                 name: '🍔 Combo Cheddar Bacon Burguer',
                 price: 19.90,
                 description: 'Cheddar Bacon Burguer + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Cheddar%20Bacon%20Burguer.jpg?raw=true',
-                category: 'combo'
+                category: 'combo',
+                stock: 8
             },
             'combo-bravari-3': {
                 name: '🍔 Combo Bravari Burguer',
                 price: 19.90,
                 description: 'Bravari Burguer + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Bravari%20Burguer.jpg?raw=true',
-                category: 'combo'
+                category: 'combo',
+                stock: 5
             },
             'combo-cheddar-duplo-4': {
                 name: '🍔 Combo Cheddar Burguer Duplo',
                 price: 19.90,
                 description: 'Cheddar Burguer Duplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true',
-                category: 'combo'
+                category: 'combo',
+                stock: 0
             },
             'combo-cheddar-bacon-duplo-5': {
                 name: '🍔 Combo Cheddar Bacon Burguer Duplo',
                 price: 19.90,
                 description: 'Cheddar Bacon Burguer Duplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true',
-                category: 'combo'
+                category: 'combo',
+                stock: 3
             },
             'combo-bravari-duplo-6': {
                 name: '🍔 Combo Bravari Burguer Duplo',
                 price: 19.90,
                 description: 'Bravari Burguer Duplo + Batata Frita + Refrigerante 350ml',
                 image: null,
-                category: 'combo'
+                category: 'combo',
+                stock: 7
             },
             'combo-bravari-bacon-triplo-7': {
                 name: '🍔 Combo Bravari Bacon Triplo',
                 price: 19.90,
                 description: 'Bravari Bacon Triplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true',
-                category: 'combo'
+                category: 'combo',
+                stock: 2
             },
             'combo-bravari-ring-triplo-8': {
                 name: '🍔 Combo Bravari Ring Triplo',
                 price: 19.90,
                 description: 'Bravari Ring Triplo + Batata Frita + Refrigerante 350ml',
                 image: null,
-                category: 'combo'
+                category: 'combo',
+                stock: 4
             },
             'combo-bravari-ring-9': {
                 name: '🍔 Combo Bravari Burguer Ring',
                 price: 19.90,
                 description: 'Bravari Burguer Ring + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true',
-                category: 'combo'
+                category: 'combo',
+                stock: 6
             },
             'combo-vulcan-10': {
                 name: '🍔 Combo Vulcan Burguer',
                 price: 19.90,
                 description: 'Vulcan Burguer + Batata Frita + Refrigerante 350ml',
                 image: null,
-                category: 'combo'
+                category: 'combo',
+                stock: 1
             },
             'combo-cream-cheese-11': {
                 name: '🍔 Combo Cream Cheese Burguer',
                 price: 19.90,
                 description: 'Cream Cheese Burguer + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true',
-                category: 'combo'
+                category: 'combo',
+                stock: 9
             },
             'combo-bravari-salada-12': {
                 name: '🍔 Combo Bravari Salada',
                 price: 19.90,
                 description: 'Bravari Salada + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true',
-                category: 'combo'
+                category: 'combo',
+                stock: 11
             },
             'combo-cheddar-triplo-13': {
                 name: '🍔 Combo Cheddar Burguer Triplo',
                 price: 19.90,
                 description: 'Cheddar Burguer Triplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true',
-                category: 'combo'
+                category: 'combo',
+                stock: 0
             }
         };
 
@@ -1225,8 +1286,15 @@
                 price: 19.90,
                 description: 'Produto delicioso preparado com ingredientes frescos',
                 image: null,
-                category: 'other'
+                category: 'other',
+                stock: 0
             };
+            
+            // Check if product is out of stock
+            if (currentProduct.stock === 0) {
+                alert('Produto indisponível no momento!');
+                return;
+            }
             
             document.getElementById('modal-title').textContent = currentProduct.name;
             document.getElementById('modal-description').textContent = currentProduct.description;
@@ -1277,7 +1345,7 @@
         function closeProductModal() {
             document.getElementById('product-modal').classList.add('hidden');
             // Restore body scroll
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = '';
         }
 
         function increaseQuantity() {
@@ -1294,6 +1362,12 @@
 
         function addToCart() {
             if (!currentProduct) return;
+            
+            // Check if there's enough stock
+            if (currentProduct.stock < quantity) {
+                alert(`Estoque insuficiente! Apenas ${currentProduct.stock} unidades disponíveis.`);
+                return;
+            }
             
             const crossells = [];
             let additionalPrice = 0;
@@ -1315,11 +1389,16 @@
                 quantity: quantity,
                 crossells: crossells,
                 observacoes: observacoes,
-                totalPrice: totalPrice
+                totalPrice: totalPrice,
+                productId: Object.keys(products).find(key => products[key] === currentProduct)
             };
+            
+            // Reduce stock temporarily (will be restored if order is not completed)
+            currentProduct.stock -= quantity;
             
             cart.push(cartItem);
             updateCartUI();
+            updateStockDisplay();
             showSuccessNotification();
             closeProductModal();
         }
@@ -1408,12 +1487,21 @@
         function closeCart() {
             document.getElementById('cart-modal').classList.add('hidden');
             // Restore body scroll
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = '';
         }
 
         function removeFromCart(index) {
+            const item = cart[index];
+            
+            // Restore stock
+            if (item.productId && products[item.productId]) {
+                products[item.productId].stock += item.quantity;
+            }
+            
             cart.splice(index, 1);
             updateCartUI();
+            updateStockDisplay();
+            
             if (cart.length === 0) {
                 closeCart();
             } else {
@@ -1437,7 +1525,7 @@
         function closeCheckout() {
             document.getElementById('checkout-modal').classList.add('hidden');
             // Restore body scroll
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = '';
         }
 
         function sendOrder() {
@@ -1532,8 +1620,43 @@
             window.open(whatsappURL, '_blank');
         }
 
+        // Initialize stock display
+        function updateStockDisplay() {
+            Object.keys(products).forEach(productId => {
+                const product = products[productId];
+                const productCard = document.querySelector(`[onclick="openProductModal('${productId}')"]`);
+                
+                if (productCard) {
+                    if (product.stock === 0) {
+                        // Add out of stock styling
+                        productCard.classList.add('opacity-50', 'cursor-not-allowed');
+                        productCard.onclick = null;
+                        
+                        // Add out of stock badge
+                        if (!productCard.querySelector('.stock-badge')) {
+                            const badge = document.createElement('div');
+                            badge.className = 'stock-badge absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-bold';
+                            badge.textContent = 'ESGOTADO';
+                            productCard.style.position = 'relative';
+                            productCard.appendChild(badge);
+                        }
+                    } else if (product.stock <= 3) {
+                        // Add low stock badge
+                        if (!productCard.querySelector('.stock-badge')) {
+                            const badge = document.createElement('div');
+                            badge.className = 'stock-badge absolute top-2 right-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full font-bold';
+                            badge.textContent = `${product.stock} restantes`;
+                            productCard.style.position = 'relative';
+                            productCard.appendChild(badge);
+                        }
+                    }
+                }
+            });
+        }
+
         // Initialize
         updateCartUI();
+        updateStockDisplay();
         
         // Show welcome popup on page load
         window.addEventListener('load', function() {
@@ -1607,5 +1730,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c0539b5799e10b',t:'MTc1NzM1NDIyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c069a33430e10b',t:'MTc1NzM1NTEzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
