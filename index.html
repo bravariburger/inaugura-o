@@ -1082,11 +1082,11 @@
         */
         
         const coupons = {
-            '10OFF': { discount: 10, type: 'percentage', active: true },
-            '15OFF': { discount: 15, type: 'percentage', active: true },
+            '10OFF': { discount: 10, type: 'percentage', true: true },
+            '15OFF': { discount: 15, type: 'percentage', true: true },
             '20OFF': { discount: 20, type: 'percentage', active: true },
-            '30OFF': { discount: 30, type: 'percentage', active: true },
-            'FRETEFREE': { discount: 0, type: 'free_shipping', active: true },
+            '30OFF': { discount: 30, type: 'percentage', true: true },
+            'FRETEFREE': { discount: 0, type: 'free_shipping', true: true },
             'BEBIDAFREE': { discount: 0, type: 'free_drink', active: true }
         };
         
@@ -1100,7 +1100,7 @@
                 description: 'Delicioso burger com queijo cheddar derretido, alface, tomate e molho especial',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Burguer.jpg?raw=true',
                 category: 'burger',
-                stock: 10
+                stock: 100
             },
             'cheddar-bacon-burger-2': {
                 name: '🍔 Cheddar Bacon Burguer',
@@ -1108,7 +1108,7 @@
                 description: 'Burger com cheddar cremoso e bacon crocante, alface, tomate e molho especial',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Bacon%20Burguer.jpg?raw=true',
                 category: 'burger',
-                stock: 8
+                stock: 100
             },
             'bravari-burger-3': {
                 name: '🍔 Bravari Burguer',
@@ -1116,7 +1116,7 @@
                 description: 'Nosso burger especial da casa com ingredientes selecionados',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Bravari%20Burguer.jpg?raw=true',
                 category: 'burger',
-                stock: 5
+                stock: 100
             },
             'cheddar-duplo-4': {
                 name: '🍔 Cheddar Burguer Duplo',
@@ -1124,7 +1124,7 @@
                 description: 'Dupla dose de sabor com cheddar cremoso',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Burguer%20Duplo.jpg?raw=true',
                 category: 'burger',
-                stock: 0
+                stock: 100
             },
             'cheddar-bacon-duplo-5': {
                 name: '🍔 Cheddar Bacon Burguer Duplo',
@@ -1132,7 +1132,7 @@
                 description: 'Duplo prazer com cheddar e bacon crocante',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Bacon%20Burguer%20Duplo.jpg?raw=true',
                 category: 'burger',
-                stock: 3
+                stock: 100
             },
             'bravari-duplo-6': {
                 name: '🍔 Bravari Burguer Duplo',
@@ -1140,7 +1140,7 @@
                 description: 'Versão dupla do nosso especial da casa',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Bravari%20Burguer%20Duplo.jpg?raw=true',
                 category: 'burger',
-                stock: 7
+                stock: 100
             },
             'bravari-bacon-triplo-7': {
                 name: '🍔 Bravari Bacon Triplo',
@@ -1148,7 +1148,7 @@
                 description: 'Tripla dose de sabor com bacon crocante',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Bravari%20Bacon%20Triplo.jpg?raw=true',
                 category: 'burger',
-                stock: 2
+                stock: 100
             },
             'bravari-ring-triplo-8': {
                 name: '🍔 Bravari Ring Triplo',
@@ -1156,7 +1156,7 @@
                 description: 'Triplo burger com onion rings crocantes',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Bravari%20Ring%20Triplo.jpg?raw=true',
                 category: 'burger',
-                stock: 4
+                stock: 100
             },
             'bravari-ring-9': {
                 name: '🍔 Bravari Burguer Ring',
@@ -1164,7 +1164,7 @@
                 description: 'Burger especial com onion rings',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/bravari%20burguer%20ring%20duplo.jpg?raw=true',
                 category: 'burger',
-                stock: 6
+                stock: 100
             },
             'vulcan-burger-10': {
                 name: '🍔 Vulcan Burguer',
@@ -1172,7 +1172,7 @@
                 description: 'Burger picante para os corajosos',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/bravari%20burguer%20ring%20duplo.jpg?raw=true',
                 category: 'burger',
-                stock: 1
+                stock: 0
             },
             'cream-cheese-11': {
                 name: '🍔 Cream Cheese Burguer',
@@ -1180,7 +1180,7 @@
                 description: 'Burger cremoso com cream cheese',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/bravari%20burguer%20ring%20duplo.jpg?raw=true',
                 category: 'burger',
-                stock: 9
+                stock: 0
             },
             'bravari-salada-12': {
                 name: '🍔 Bravari Salada',
@@ -1188,7 +1188,7 @@
                 description: 'Opção saudável com salada fresca',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Bravari%20Salada.jpg?raw=true',
                 category: 'burger',
-                stock: 12
+                stock: 100
             },
             'cheddar-triplo-13': {
                 name: '🍔 Cheddar Burguer Triplo',
@@ -1196,7 +1196,7 @@
                 description: 'Tripla dose de cheddar cremoso',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Burguer%20Triplo.jpg?raw=true',
                 category: 'burger',
-                stock: 0
+                stock: 100
             },
             
             // Sobremesas
@@ -1206,7 +1206,7 @@
                 description: 'Brownie cremoso de chocolate com pedaços de chocolate',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Sobremesas/brownie.jpg?raw=true',
                 category: 'sobremesa',
-                stock: 15
+                stock: 100
             },
             'brownie-branco': {
                 name: '🍫 Brownie Chocolate Branco',
@@ -1214,7 +1214,7 @@
                 description: 'Brownie de chocolate branco cremoso',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Sobremesas/brownie.jpg?raw=true',
                 category: 'sobremesa',
-                stock: 8
+                stock: 100
             },
             'brownie-nutella': {
                 name: '🍫 Brownie Nutella',
@@ -1230,7 +1230,7 @@
                 description: 'Brownie com cobertura de morango fresco',
                 image: null,
                 category: 'sobremesa',
-                stock: 6
+                stock: 0
             },
             
             // Acompanhamentos
@@ -1240,7 +1240,7 @@
                 description: 'Porção pequena de batata frita crocante',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Batatas/batata%20frita.jpg?raw=true',
                 category: 'acompanhamento',
-                stock: 20
+                stock: 100
             },
             'batata-m': {
                 name: '🍟 Batata Frita M',
@@ -1248,7 +1248,7 @@
                 description: 'Porção média de batata frita crocante',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Batatas/batata%20frita.jpg?raw=true',
                 category: 'acompanhamento',
-                stock: 15
+                stock: 100
             },
             'batata-g': {
                 name: '🍟 Batata Frita G',
@@ -1256,7 +1256,7 @@
                 description: 'Porção grande de batata frita crocante',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Batatas/batata%20frita.jpg?raw=true',
                 category: 'acompanhamento',
-                stock: 10
+                stock: 100
             },
             
             // Bebidas
@@ -1266,7 +1266,7 @@
                 description: 'Refrigerante Coca Cola gelado',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Bebidas/coca.jpg?raw=true',
                 category: 'bebida',
-                stock: 25
+                stock: 100
             },
             'coca-zero': {
                 name: 'Coca Cola Zero 350ml',
@@ -1274,7 +1274,7 @@
                 description: 'Refrigerante Coca Cola Zero gelado',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Bebidas/coca%20zero.jpg?raw=true',
                 category: 'bebida',
-                stock: 18
+                stock: 100
             },
             'guarana-antartica': {
                 name: 'Guaraná Antártica 350ml',
@@ -1282,7 +1282,7 @@
                 description: 'Refrigerante Guaraná Antártica gelado',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Bebidas/giuarana%20antartica.jpg?raw=true',
                 category: 'bebida',
-                stock: 22
+                stock: 0
             },
             
             // Combos
@@ -1292,7 +1292,7 @@
                 description: 'Cheddar Burguer + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Cheddar%20Burguer.jpg?raw=true',
                 category: 'combo',
-                stock: 12
+                stock: 100
             },
             'combo-cheddar-bacon-2': {
                 name: '🍔 Combo Cheddar Bacon Burguer',
@@ -1300,7 +1300,7 @@
                 description: 'Cheddar Bacon Burguer + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Cheddar%20Bacon%20Burguer.jpg?raw=true',
                 category: 'combo',
-                stock: 8
+                stock: 100
             },
             'combo-bravari-3': {
                 name: '🍔 Combo Bravari Burguer',
@@ -1308,7 +1308,7 @@
                 description: 'Bravari Burguer + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Bravari%20Burguer.jpg?raw=true',
                 category: 'combo',
-                stock: 5
+                stock: 100
             },
             'combo-cheddar-duplo-4': {
                 name: '🍔 Combo Cheddar Burguer Duplo',
@@ -1316,7 +1316,7 @@
                 description: 'Cheddar Burguer Duplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Cheddar%20Burguer%20Duplo.jpg?raw=true',
                 category: 'combo',
-                stock: 0
+                stock: 100
             },
             'combo-cheddar-bacon-duplo-5': {
                 name: '🍔 Combo Cheddar Bacon Burguer Duplo',
@@ -1324,7 +1324,7 @@
                 description: 'Cheddar Bacon Burguer Duplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Cheddar%20Bacon%20Burguer%20Duplo.jpg?raw=true',
                 category: 'combo',
-                stock: 3
+                stock: 100
             },
             'combo-bravari-duplo-6': {
                 name: '🍔 Combo Bravari Burguer Duplo',
@@ -1332,7 +1332,7 @@
                 description: 'Bravari Burguer Duplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Bravari%20Burguer%20Duplo.jpg?raw=true',
                 category: 'combo',
-                stock: 7
+                stock: 100
             },
             'combo-bravari-bacon-triplo-7': {
                 name: '🍔 Combo Bravari Bacon Triplo',
@@ -1340,7 +1340,7 @@
                 description: 'Bravari Bacon Triplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Bravari%20Bacon%20Triplo.jpg?raw=true',
                 category: 'combo',
-                stock: 2
+                stock: 100
             },
             'combo-bravari-ring-triplo-8': {
                 name: '🍔 Combo Bravari Ring Triplo',
@@ -1348,7 +1348,7 @@
                 description: 'Bravari Ring Triplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Bravari%20Ring%20Triplo.jpg?raw=true',
                 category: 'combo',
-                stock: 4
+                stock: 100
             },
             'combo-bravari-ring-9': {
                 name: '🍔 Combo Bravari Burguer Ring',
@@ -1356,7 +1356,7 @@
                 description: 'Bravari Burguer Ring + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/bravari%20burguer%20ring%20duplo.jpg?raw=true',
                 category: 'combo',
-                stock: 6
+                stock: 100
             },
             'combo-vulcan-10': {
                 name: '🍔 Combo Vulcan Burguer',
@@ -1364,7 +1364,7 @@
                 description: 'Vulcan Burguer + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/bravari%20burguer%20ring%20duplo.jpg?raw=true',
                 category: 'combo',
-                stock: 1
+                stock: 0
             },
             'combo-cream-cheese-11': {
                 name: '🍔 Combo Cream Cheese Burguer',
@@ -1372,7 +1372,7 @@
                 description: 'Cream Cheese Burguer + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/bravari%20burguer%20ring%20duplo.jpg?raw=true',
                 category: 'combo',
-                stock: 9
+                stock: 0
             },
             'combo-bravari-salada-12': {
                 name: '🍔 Combo Bravari Salada',
@@ -1380,7 +1380,7 @@
                 description: 'Bravari Salada + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Bravari%20Burguer.jpg?raw=true',
                 category: 'combo',
-                stock: 11
+                stock: 100
             },
             'combo-cheddar-triplo-13': {
                 name: '🍔 Combo Cheddar Burguer Triplo',
@@ -1388,7 +1388,7 @@
                 description: 'Cheddar Burguer Triplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Cheddar%20Burguer%20Triplo.jpg?raw=true',
                 category: 'combo',
-                stock: 0
+                stock: 100
             }
         };
 
@@ -1964,3 +1964,4 @@
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c12bc3f778e10b',t:'MTc1NzM2MzA4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
