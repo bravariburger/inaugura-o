@@ -343,6 +343,27 @@
             animation-iteration-count: 1 !important;
             transition-duration: 0.01ms !important;
         }
+        
+        /* Animação para chamar atenção no título do troco */
+        .attention-pulse {
+            animation: attentionPulse 1.5s ease-in-out 3;
+        }
+        
+        @keyframes attentionPulse {
+            0% { 
+                transform: scale(1);
+                color: inherit;
+            }
+            50% { 
+                transform: scale(1.05);
+                color: #DC2626;
+                text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
+            }
+            100% { 
+                transform: scale(1);
+                color: inherit;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -400,6 +421,7 @@
                              alt="Cheddar Burguer" 
                              class="w-full h-32 object-cover"
                              loading="lazy"
+                             style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
                              onerror="this.style.display='none'; this.parentElement.querySelector('.no-image').style.display='flex';">
                         <div class="no-image hidden bg-gray-200 h-32 items-center justify-center">
                             <span class="text-gray-500">📷 Adicionar Foto</span>
@@ -1216,6 +1238,10 @@
                                 <span>Subtotal:</span>
                                 <span id="cart-subtotal">R$ 0,00</span>
                             </div>
+                            <div class="flex justify-between text-sm text-gray-600">
+                                <span>Taxa de serviço:</span>
+                                <span>R$ 0,30</span>
+                            </div>
                             <div id="discount-section" class="hidden">
                                 <div class="flex justify-between text-green-600">
                                     <span>Desconto:</span>
@@ -1252,7 +1278,7 @@
                         <div class="mb-6">
                             <h4 class="font-bold text-lg mb-3">🚚 Tipo de Entrega</h4>
                             <div class="space-y-3">
-                                <label class="delivery-option bg-gray-50 rounded-lg p-4 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors block">
+                                <label class="delivery-option bg-gray-50 rounded-lg p-4 border-2 border-brand-red cursor-pointer hover:border-brand-red transition-colors block bg-brand-red/5">
                                     <div class="flex items-center space-x-3">
                                         <input type="radio" name="delivery-type" value="delivery" class="w-4 h-4 text-brand-red" checked>
                                         <div>
@@ -1287,7 +1313,7 @@
                         <div class="mb-6">
                             <h4 class="font-bold text-lg mb-3">💳 Forma de Pagamento</h4>
                             <div class="space-y-3">
-                                <label class="payment-option bg-gray-50 rounded-lg p-4 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors block">
+                                <label class="payment-option bg-gray-50 rounded-lg p-4 border-2 border-brand-red cursor-pointer hover:border-brand-red transition-colors block bg-brand-red/5">
                                     <div class="flex items-center space-x-3">
                                         <input type="radio" name="payment-method" value="pix" class="w-4 h-4 text-brand-red" checked>
                                         <div>
@@ -1319,7 +1345,7 @@
 
                         <!-- Change (only for money) -->
                         <div id="change-section" class="mb-6 hidden">
-                            <h4 class="font-bold text-lg mb-3">💰 Troco</h4>
+                            <h4 id="change-title" class="font-bold text-lg mb-3">💰 Troco</h4>
                             <div class="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
                                 <p class="text-sm text-gray-600 mb-3">Total do pedido: <span id="checkout-total" class="font-bold">R$ 0,00</span></p>
                                 <input type="number" id="money-amount" placeholder="Valor que você tem para pagar" class="w-full p-3 border rounded-lg" step="0.01">
@@ -2151,7 +2177,8 @@
             
             // Calculate discount
             const discountInfo = calculateDiscount(subtotal);
-            const total = subtotal - discountInfo.discount;
+            const serviceFee = 0.30;
+            const total = subtotal + serviceFee - discountInfo.discount;
             
             cartSubtotal.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
             
@@ -2216,7 +2243,8 @@
             
             const subtotal = cart.reduce((sum, item) => sum + item.totalPrice, 0);
             const discountInfo = calculateDiscount(subtotal);
-            const finalTotal = subtotal - discountInfo.discount;
+            const serviceFee = 0.30;
+            const finalTotal = subtotal + serviceFee - discountInfo.discount;
             
             document.getElementById('checkout-total').textContent = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
             document.getElementById('final-total').textContent = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
@@ -2558,7 +2586,8 @@
                 const moneyAmount = parseFloat(document.getElementById('money-amount').value);
                 const subtotalForChange = cart.reduce((sum, item) => sum + item.totalPrice, 0);
                 const discountInfoForChange = calculateDiscount(subtotalForChange);
-                const finalTotalForChange = subtotalForChange - discountInfoForChange.discount;
+                const serviceFeeForChange = 0.30;
+                const finalTotalForChange = subtotalForChange + serviceFeeForChange - discountInfoForChange.discount;
                 
                 if (moneyAmount && moneyAmount > finalTotalForChange) {
                     const change = moneyAmount - finalTotalForChange;
@@ -2594,6 +2623,7 @@
             const discountInfo = calculateDiscount(subtotal);
             
             message += `💰 *SUBTOTAL: R$ ${subtotal.toFixed(2).replace('.', ',')}*\n`;
+            message += `🔧 *TAXA DE SERVIÇO: R$ 0,30*\n`;
             
             // Show applied coupons and discounts
             if (appliedCoupons.length > 0) {
@@ -2611,7 +2641,8 @@
                 }
             }
             
-            const finalTotal = subtotal - discountInfo.discount;
+            const serviceFee = 0.30;
+            const finalTotal = subtotal + serviceFee - discountInfo.discount;
             message += `\n💰 *TOTAL FINAL: R$ ${finalTotal.toFixed(2).replace('.', ',')}*\n\n`;
             message += "🚀 *PEDIDO ENVIADO!*";
             
@@ -3297,6 +3328,17 @@
             // Delivery type change
             document.querySelectorAll('input[name="delivery-type"]').forEach(radio => {
                 radio.addEventListener('change', function() {
+                    // Update visual selection
+                    document.querySelectorAll('.delivery-option').forEach(option => {
+                        option.classList.remove('border-brand-red', 'bg-brand-red/5');
+                        option.classList.add('border-gray-200');
+                    });
+                    
+                    const selectedOption = this.closest('.delivery-option');
+                    selectedOption.classList.remove('border-gray-200');
+                    selectedOption.classList.add('border-brand-red', 'bg-brand-red/5');
+                    
+                    // Show/hide address section
                     const addressSection = document.getElementById('address-section');
                     if (this.value === 'delivery') {
                         addressSection.classList.remove('hidden');
@@ -3309,11 +3351,32 @@
             // Payment method change
             document.querySelectorAll('input[name="payment-method"]').forEach(radio => {
                 radio.addEventListener('change', function() {
+                    // Update visual selection
+                    document.querySelectorAll('.payment-option').forEach(option => {
+                        option.classList.remove('border-brand-red', 'bg-brand-red/5');
+                        option.classList.add('border-gray-200');
+                    });
+                    
+                    const selectedOption = this.closest('.payment-option');
+                    selectedOption.classList.remove('border-gray-200');
+                    selectedOption.classList.add('border-brand-red', 'bg-brand-red/5');
+                    
+                    // Show/hide change section with animation
                     const changeSection = document.getElementById('change-section');
+                    const changeTitle = document.getElementById('change-title');
+                    
                     if (this.value === 'money') {
                         changeSection.classList.remove('hidden');
+                        // Adicionar animação de atenção no título
+                        setTimeout(() => {
+                            changeTitle.classList.add('attention-pulse');
+                            setTimeout(() => {
+                                changeTitle.classList.remove('attention-pulse');
+                            }, 4500); // 3 pulsos de 1.5s cada
+                        }, 100);
                     } else {
                         changeSection.classList.add('hidden');
+                        changeTitle.classList.remove('attention-pulse');
                     }
                 });
             });
@@ -3322,7 +3385,8 @@
             document.getElementById('money-amount').addEventListener('input', function() {
                 const subtotal = cart.reduce((sum, item) => sum + item.totalPrice, 0);
                 const discountInfo = calculateDiscount(subtotal);
-                const finalTotal = subtotal - discountInfo.discount;
+                const serviceFee = 0.30;
+                const finalTotal = subtotal + serviceFee - discountInfo.discount;
                 const moneyAmount = parseFloat(this.value);
                 const changeAmountEl = document.getElementById('change-amount');
                 
@@ -3361,5 +3425,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c195b4a23d8a83',t:'MTc1NzM2NzQyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c1a47a84d98a83',t:'MTc1NzM2ODAyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
