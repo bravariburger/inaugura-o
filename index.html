@@ -1345,11 +1345,12 @@
 
                         <!-- Change (only for money) -->
                         <div id="change-section" class="mb-6 hidden">
-                            <h4 id="change-title" class="font-bold text-lg mb-3">💰 Troco</h4>
+                            <h4 id="change-title" class="font-bold text-lg mb-3">💰 Troco <span class="text-red-500">*</span></h4>
                             <div class="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
                                 <p class="text-sm text-gray-600 mb-3">Total do pedido: <span id="checkout-total" class="font-bold">R$ 0,00</span></p>
-                                <input type="number" id="money-amount" placeholder="Valor que você tem para pagar" class="w-full p-3 border rounded-lg" step="0.01">
+                                <input type="number" id="money-amount" placeholder="Valor que você tem para pagar *" class="w-full p-3 border rounded-lg" step="0.01" required>
                                 <p id="change-amount" class="text-sm text-gray-600 mt-2"></p>
+                                <p class="text-xs text-red-500 mt-1">* Campo obrigatório para pagamento em dinheiro</p>
                             </div>
                         </div>
 
@@ -2546,6 +2547,27 @@
                 }
             }
             
+            // Validação obrigatória do troco para pagamento em dinheiro
+            if (paymentMethod === 'money') {
+                const moneyAmount = parseFloat(document.getElementById('money-amount').value);
+                const subtotalForValidation = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+                const discountInfoForValidation = calculateDiscount(subtotalForValidation);
+                const serviceFeeForValidation = 0.30;
+                const finalTotalForValidation = subtotalForValidation + serviceFeeForValidation - discountInfoForValidation.discount;
+                
+                if (!moneyAmount || isNaN(moneyAmount)) {
+                    showNotification('Por favor, informe o valor que você tem para pagar', 'error');
+                    document.getElementById('money-amount').focus();
+                    return;
+                }
+                
+                if (moneyAmount < finalTotalForValidation) {
+                    showNotification('O valor informado é insuficiente para o pagamento', 'error');
+                    document.getElementById('money-amount').focus();
+                    return;
+                }
+            }
+            
             let message = "🍔 *NOVO PEDIDO - BRAVARI BURGER* 🍔\n\n";
             
             // Customer info
@@ -3425,5 +3447,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c1a47a84d98a83',t:'MTc1NzM2ODAyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c1acf106968a83',t:'MTc1NzM2ODM3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
