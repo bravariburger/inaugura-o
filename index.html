@@ -17,6 +17,15 @@
             }
         }
     </script>
+    <style>
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
@@ -65,7 +74,7 @@
             <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 🍔 Burgers
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-3 md:gap-4">
                 <div class="product-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer" onclick="openProductModal('cheddar-burger-1')">
                     <img src="https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Burguer.jpg?raw=true" 
                          alt="Cheddar Burguer" 
@@ -228,30 +237,56 @@
             <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 🍫 Sobremesas
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="product-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer" onclick="openProductModal('brownie-chocolate')">
-                    <div class="no-image bg-gray-200 h-32 flex items-center justify-center">
-                        <span class="text-gray-500">📷 Adicionar Foto</span>
+            
+            <!-- Carousel Container -->
+            <div class="relative">
+                <div id="sobremesas-carousel" class="flex overflow-x-auto scrollbar-hide space-x-4 pb-4">
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer flex-shrink-0 w-64" onclick="openProductModal('brownie-chocolate')">
+                        <div class="no-image bg-gray-200 h-32 flex items-center justify-center">
+                            <span class="text-gray-500">📷 Adicionar Foto</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-800">Brownie Chocolate</h3>
+                            <p class="text-sm text-gray-600 mt-1">Brownie cremoso de chocolate</p>
+                            <p class="text-brand-red font-bold mt-2">R$ 19,90</p>
+                        </div>
                     </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-800">Brownie Chocolate</h3>
-                        <p class="text-sm text-gray-600 mt-1">Brownie cremoso de chocolate</p>
-                        <p class="text-brand-red font-bold mt-2">R$ 19,90</p>
-                    </div>
-                </div>
 
-                <div class="product-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer" onclick="openProductModal('brownie-branco')">
-                    <img src="https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true" 
-                         alt="Brownie Chocolate Branco" 
-                         class="w-full h-32 object-cover"
-                         onerror="this.src=''; this.parentElement.querySelector('.no-image').style.display='flex';">
-                    <div class="no-image hidden bg-gray-200 h-32 items-center justify-center">
-                        <span class="text-gray-500">📷 Adicionar Foto</span>
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer flex-shrink-0 w-64" onclick="openProductModal('brownie-branco')">
+                        <img src="https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true" 
+                             alt="Brownie Chocolate Branco" 
+                             class="w-full h-32 object-cover"
+                             onerror="this.src=''; this.parentElement.querySelector('.no-image').style.display='flex';">
+                        <div class="no-image hidden bg-gray-200 h-32 items-center justify-center">
+                            <span class="text-gray-500">📷 Adicionar Foto</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-800">Brownie Chocolate Branco</h3>
+                            <p class="text-sm text-gray-600 mt-1">Brownie de chocolate branco</p>
+                            <p class="text-brand-red font-bold mt-2">R$ 19,90</p>
+                        </div>
                     </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-800">Brownie Chocolate Branco</h3>
-                        <p class="text-sm text-gray-600 mt-1">Brownie de chocolate branco</p>
-                        <p class="text-brand-red font-bold mt-2">R$ 19,90</p>
+
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer flex-shrink-0 w-64" onclick="openProductModal('brownie-nutella')">
+                        <div class="no-image bg-gray-200 h-32 flex items-center justify-center">
+                            <span class="text-gray-500">📷 Adicionar Foto</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-800">Brownie Nutella</h3>
+                            <p class="text-sm text-gray-600 mt-1">Brownie com recheio de Nutella</p>
+                            <p class="text-brand-red font-bold mt-2">R$ 19,90</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer flex-shrink-0 w-64" onclick="openProductModal('brownie-morango')">
+                        <div class="no-image bg-gray-200 h-32 flex items-center justify-center">
+                            <span class="text-gray-500">📷 Adicionar Foto</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-800">Brownie Morango</h3>
+                            <p class="text-sm text-gray-600 mt-1">Brownie com cobertura de morango</p>
+                            <p class="text-brand-red font-bold mt-2">R$ 19,90</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -262,7 +297,7 @@
             <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 🍟 Acompanhamentos
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-3 md:gap-4">
                 <div class="product-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer" onclick="openProductModal('batata-p')">
                     <img src="https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true" 
                          alt="Batata Frita P" 
@@ -311,7 +346,7 @@
             <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 🥤 Bebidas
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-3 md:gap-4">
                 <div class="product-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer" onclick="openProductModal('coca-cola')">
                     <div class="no-image bg-gray-200 h-32 flex items-center justify-center">
                         <span class="text-gray-500">📷 Adicionar Foto</span>
@@ -360,7 +395,7 @@
             <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 🍔 Combos
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-3 md:gap-4">
                 <div class="product-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer" onclick="openProductModal('combo-cheddar-1')">
                     <img src="https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Cheddar%20Burguer.jpg?raw=true" 
                          alt="Combo Cheddar Burguer" 
@@ -556,9 +591,10 @@
     </div>
 
     <!-- Product Modal -->
-    <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden overflow-hidden">
-        <div class="flex items-end md:items-center justify-center min-h-screen p-4 overflow-y-auto">
-            <div class="bg-white rounded-t-lg md:rounded-lg w-full max-w-md max-h-[95vh] md:max-h-[85vh] overflow-y-auto">
+    <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden">
+        <div class="fixed inset-0 flex items-end md:items-center justify-center p-4">
+            <div class="bg-white rounded-t-2xl md:rounded-2xl w-full max-w-md max-h-[90vh] md:max-h-[80vh] overflow-hidden shadow-2xl transform transition-all duration-300">
+                <div class="overflow-y-auto max-h-full">
                 <div class="p-4 md:p-6">
                     <div class="flex justify-between items-center mb-4 sticky top-0 bg-white z-10 pb-2">
                         <h3 id="modal-title" class="text-xl font-bold"></h3>
@@ -574,56 +610,140 @@
 
 
                     <!-- Crossell para Burgers -->
-                    <div id="crossell-burgers" class="mb-4 hidden">
-                        <h4 class="font-semibold mb-2">Adicione uma batata:</h4>
-                        <div class="space-y-2">
-                            <label class="flex items-center justify-between">
-                                <span>🍟 Batata Frita P (+R$ 19,90)</span>
-                                <input type="radio" name="batata-crossell" class="crossell" data-name="Batata Frita P" data-price="19.90">
-                            </label>
-                            <label class="flex items-center justify-between">
-                                <span>🍟 Batata Frita M (+R$ 19,90)</span>
-                                <input type="radio" name="batata-crossell" class="crossell" data-name="Batata Frita M" data-price="19.90">
-                            </label>
-                            <label class="flex items-center justify-between">
-                                <span>🍟 Batata Frita G (+R$ 19,90)</span>
-                                <input type="radio" name="batata-crossell" class="crossell" data-name="Batata Frita G" data-price="19.90">
-                            </label>
+                    <div id="crossell-burgers" class="mb-6 hidden">
+                        <div class="bg-gradient-to-r from-brand-yellow/20 to-brand-red/20 rounded-lg p-4 mb-4">
+                            <h4 class="font-bold text-lg text-gray-800 mb-3 flex items-center">
+                                🍟 Que tal uma batata?
+                            </h4>
+                            <div class="grid grid-cols-1 gap-3">
+                                <label class="crossell-option bg-white rounded-lg p-3 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="batata-crossell" class="crossell w-4 h-4 text-brand-red" data-name="Batata Frita P" data-price="19.90">
+                                            <div>
+                                                <span class="font-medium">🍟 Batata Frita P</span>
+                                                <p class="text-sm text-gray-500">Porção pequena</p>
+                                            </div>
+                                        </div>
+                                        <span class="font-bold text-brand-red">+R$ 19,90</span>
+                                    </div>
+                                </label>
+                                <label class="crossell-option bg-white rounded-lg p-3 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="batata-crossell" class="crossell w-4 h-4 text-brand-red" data-name="Batata Frita M" data-price="19.90">
+                                            <div>
+                                                <span class="font-medium">🍟 Batata Frita M</span>
+                                                <p class="text-sm text-gray-500">Porção média</p>
+                                            </div>
+                                        </div>
+                                        <span class="font-bold text-brand-red">+R$ 19,90</span>
+                                    </div>
+                                </label>
+                                <label class="crossell-option bg-white rounded-lg p-3 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="batata-crossell" class="crossell w-4 h-4 text-brand-red" data-name="Batata Frita G" data-price="19.90">
+                                            <div>
+                                                <span class="font-medium">🍟 Batata Frita G</span>
+                                                <p class="text-sm text-gray-500">Porção grande</p>
+                                            </div>
+                                        </div>
+                                        <span class="font-bold text-brand-red">+R$ 19,90</span>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
                         
-                        <h4 class="font-semibold mb-2 mt-4">Adicione uma bebida:</h4>
-                        <div class="space-y-2">
-                            <label class="flex items-center justify-between">
-                                <span>Coca Cola 350ml (+R$ 19,90)</span>
-                                <input type="radio" name="bebida-crossell" class="crossell" data-name="Coca Cola 350ml" data-price="19.90">
-                            </label>
-                            <label class="flex items-center justify-between">
-                                <span>Coca Cola Zero 350ml (+R$ 19,90)</span>
-                                <input type="radio" name="bebida-crossell" class="crossell" data-name="Coca Cola Zero 350ml" data-price="19.90">
-                            </label>
-                            <label class="flex items-center justify-between">
-                                <span>Guaraná Antártica 350ml (+R$ 19,90)</span>
-                                <input type="radio" name="bebida-crossell" class="crossell" data-name="Guaraná Antártica 350ml" data-price="19.90">
-                            </label>
+                        <div class="bg-gradient-to-r from-blue-100 to-green-100 rounded-lg p-4">
+                            <h4 class="font-bold text-lg text-gray-800 mb-3 flex items-center">
+                                🥤 Adicione uma bebida
+                            </h4>
+                            <div class="grid grid-cols-1 gap-3">
+                                <label class="crossell-option bg-white rounded-lg p-3 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="bebida-crossell" class="crossell w-4 h-4 text-brand-red" data-name="Coca Cola 350ml" data-price="19.90">
+                                            <div>
+                                                <span class="font-medium">🥤 Coca Cola</span>
+                                                <p class="text-sm text-gray-500">350ml gelada</p>
+                                            </div>
+                                        </div>
+                                        <span class="font-bold text-brand-red">+R$ 19,90</span>
+                                    </div>
+                                </label>
+                                <label class="crossell-option bg-white rounded-lg p-3 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="bebida-crossell" class="crossell w-4 h-4 text-brand-red" data-name="Coca Cola Zero 350ml" data-price="19.90">
+                                            <div>
+                                                <span class="font-medium">🥤 Coca Cola Zero</span>
+                                                <p class="text-sm text-gray-500">350ml gelada</p>
+                                            </div>
+                                        </div>
+                                        <span class="font-bold text-brand-red">+R$ 19,90</span>
+                                    </div>
+                                </label>
+                                <label class="crossell-option bg-white rounded-lg p-3 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="bebida-crossell" class="crossell w-4 h-4 text-brand-red" data-name="Guaraná Antártica 350ml" data-price="19.90">
+                                            <div>
+                                                <span class="font-medium">🥤 Guaraná Antártica</span>
+                                                <p class="text-sm text-gray-500">350ml gelada</p>
+                                            </div>
+                                        </div>
+                                        <span class="font-bold text-brand-red">+R$ 19,90</span>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Crossell para Combos -->
-                    <div id="crossell-combos" class="mb-4 hidden">
-                        <h4 class="font-semibold mb-2">Aumente sua batata:</h4>
-                        <div class="space-y-2">
-                            <label class="flex items-center justify-between">
-                                <span>🍟 Batata P (+R$ 12,90)</span>
-                                <input type="radio" name="upgrade-batata" class="crossell" data-name="Upgrade Batata P" data-price="12.90">
-                            </label>
-                            <label class="flex items-center justify-between">
-                                <span>🍟 Batata M (+R$ 12,90)</span>
-                                <input type="radio" name="upgrade-batata" class="crossell" data-name="Upgrade Batata M" data-price="12.90">
-                            </label>
-                            <label class="flex items-center justify-between">
-                                <span>🍟 Batata G (+R$ 12,90)</span>
-                                <input type="radio" name="upgrade-batata" class="crossell" data-name="Upgrade Batata G" data-price="12.90">
-                            </label>
+                    <div id="crossell-combos" class="mb-6 hidden">
+                        <div class="bg-gradient-to-r from-brand-yellow/20 to-brand-red/20 rounded-lg p-4">
+                            <h4 class="font-bold text-lg text-gray-800 mb-3 flex items-center">
+                                ⬆️ Aumente sua batata
+                            </h4>
+                            <div class="grid grid-cols-1 gap-3">
+                                <label class="crossell-option bg-white rounded-lg p-3 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="upgrade-batata" class="crossell w-4 h-4 text-brand-red" data-name="Upgrade Batata P" data-price="12.90">
+                                            <div>
+                                                <span class="font-medium">🍟 Batata P</span>
+                                                <p class="text-sm text-gray-500">Upgrade para pequena</p>
+                                            </div>
+                                        </div>
+                                        <span class="font-bold text-brand-red">+R$ 12,90</span>
+                                    </div>
+                                </label>
+                                <label class="crossell-option bg-white rounded-lg p-3 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="upgrade-batata" class="crossell w-4 h-4 text-brand-red" data-name="Upgrade Batata M" data-price="12.90">
+                                            <div>
+                                                <span class="font-medium">🍟 Batata M</span>
+                                                <p class="text-sm text-gray-500">Upgrade para média</p>
+                                            </div>
+                                        </div>
+                                        <span class="font-bold text-brand-red">+R$ 12,90</span>
+                                    </div>
+                                </label>
+                                <label class="crossell-option bg-white rounded-lg p-3 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="upgrade-batata" class="crossell w-4 h-4 text-brand-red" data-name="Upgrade Batata G" data-price="12.90">
+                                            <div>
+                                                <span class="font-medium">🍟 Batata G</span>
+                                                <p class="text-sm text-gray-500">Upgrade para grande</p>
+                                            </div>
+                                        </div>
+                                        <span class="font-bold text-brand-red">+R$ 12,90</span>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
                     </div>
 
@@ -644,6 +764,7 @@
                             Adicionar ao Carrinho
                         </button>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -674,9 +795,10 @@
     </div>
 
     <!-- Cart Modal -->
-    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden overflow-hidden">
-        <div class="flex items-end md:items-center justify-center min-h-screen p-4 overflow-y-auto">
-            <div class="bg-white rounded-t-lg md:rounded-lg w-full max-w-md max-h-[95vh] md:max-h-[85vh] overflow-y-auto">
+    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden">
+        <div class="fixed inset-0 flex items-end md:items-center justify-center p-4">
+            <div class="bg-white rounded-t-2xl md:rounded-2xl w-full max-w-md max-h-[90vh] md:max-h-[80vh] overflow-hidden shadow-2xl transform transition-all duration-300">
+                <div class="overflow-y-auto max-h-full">
                 <div class="p-4 md:p-6">
                     <div class="flex justify-between items-center mb-4 sticky top-0 bg-white z-10 pb-2">
                         <h3 class="text-xl font-bold">Seu Pedido</h3>
@@ -690,8 +812,125 @@
                             <span class="text-xl font-bold">Total:</span>
                             <span id="cart-total" class="text-xl font-bold text-brand-red">R$ 0,00</span>
                         </div>
-                        <button onclick="sendToWhatsApp()" class="w-full bg-green-500 text-white py-3 rounded-lg font-semibold">
-                            🍳 Enviar Pedido para Cozinha
+                        <button onclick="openCheckout()" class="w-full bg-brand-red text-white py-3 rounded-lg font-semibold">
+                            🛒 Finalizar Pedido
+                        </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden">
+        <div class="fixed inset-0 flex items-end md:items-center justify-center p-4">
+            <div class="bg-white rounded-t-2xl md:rounded-2xl w-full max-w-md max-h-[90vh] md:max-h-[80vh] overflow-hidden shadow-2xl transform transition-all duration-300">
+                <div class="overflow-y-auto max-h-full">
+                    <div class="p-4 md:p-6">
+                        <div class="flex justify-between items-center mb-6 sticky top-0 bg-white z-10 pb-2">
+                            <h3 class="text-xl font-bold">Finalizar Pedido</h3>
+                            <button onclick="closeCheckout()" class="text-gray-500 text-2xl hover:text-gray-700 p-1">&times;</button>
+                        </div>
+
+                        <!-- Delivery Type -->
+                        <div class="mb-6">
+                            <h4 class="font-bold text-lg mb-3">🚚 Tipo de Entrega</h4>
+                            <div class="space-y-3">
+                                <label class="delivery-option bg-gray-50 rounded-lg p-4 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors block">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="radio" name="delivery-type" value="delivery" class="w-4 h-4 text-brand-red" checked>
+                                        <div>
+                                            <span class="font-medium">🛵 Delivery</span>
+                                            <p class="text-sm text-gray-500">Entregamos na sua casa</p>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="delivery-option bg-gray-50 rounded-lg p-4 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors block">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="radio" name="delivery-type" value="pickup" class="w-4 h-4 text-brand-red">
+                                        <div>
+                                            <span class="font-medium">🏪 Retirar no Local</span>
+                                            <p class="text-sm text-gray-500">Você busca na loja</p>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Address (only for delivery) -->
+                        <div id="address-section" class="mb-6">
+                            <h4 class="font-bold text-lg mb-3">📍 Endereço de Entrega</h4>
+                            <div class="space-y-3">
+                                <input type="text" id="address" placeholder="Rua, número" class="w-full p-3 border rounded-lg">
+                                <input type="text" id="neighborhood" placeholder="Bairro" class="w-full p-3 border rounded-lg">
+                                <input type="text" id="reference" placeholder="Ponto de referência (opcional)" class="w-full p-3 border rounded-lg">
+                            </div>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="mb-6">
+                            <h4 class="font-bold text-lg mb-3">💳 Forma de Pagamento</h4>
+                            <div class="space-y-3">
+                                <label class="payment-option bg-gray-50 rounded-lg p-4 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors block">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="radio" name="payment-method" value="pix" class="w-4 h-4 text-brand-red" checked>
+                                        <div>
+                                            <span class="font-medium">📱 PIX</span>
+                                            <p class="text-sm text-gray-500">Pagamento instantâneo</p>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="payment-option bg-gray-50 rounded-lg p-4 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors block">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="radio" name="payment-method" value="card" class="w-4 h-4 text-brand-red">
+                                        <div>
+                                            <span class="font-medium">💳 Cartão</span>
+                                            <p class="text-sm text-gray-500">Débito ou crédito na entrega</p>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="payment-option bg-gray-50 rounded-lg p-4 border-2 border-gray-200 cursor-pointer hover:border-brand-red transition-colors block">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="radio" name="payment-method" value="money" class="w-4 h-4 text-brand-red">
+                                        <div>
+                                            <span class="font-medium">💵 Dinheiro</span>
+                                            <p class="text-sm text-gray-500">Pagamento em espécie</p>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Change (only for money) -->
+                        <div id="change-section" class="mb-6 hidden">
+                            <h4 class="font-bold text-lg mb-3">💰 Troco</h4>
+                            <div class="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+                                <p class="text-sm text-gray-600 mb-3">Total do pedido: <span id="checkout-total" class="font-bold">R$ 0,00</span></p>
+                                <input type="number" id="money-amount" placeholder="Valor que você tem para pagar" class="w-full p-3 border rounded-lg" step="0.01">
+                                <p id="change-amount" class="text-sm text-gray-600 mt-2"></p>
+                            </div>
+                        </div>
+
+                        <!-- Customer Info -->
+                        <div class="mb-6">
+                            <h4 class="font-bold text-lg mb-3">👤 Seus Dados</h4>
+                            <div class="space-y-3">
+                                <input type="text" id="customer-name" placeholder="Seu nome" class="w-full p-3 border rounded-lg">
+                                <input type="tel" id="customer-phone" placeholder="Seu telefone" class="w-full p-3 border rounded-lg">
+                            </div>
+                        </div>
+
+                        <!-- Order Summary -->
+                        <div class="border-t pt-4 mb-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-xl font-bold">Total:</span>
+                                <span id="final-total" class="text-xl font-bold text-brand-red">R$ 0,00</span>
+                            </div>
+                        </div>
+
+                        <button onclick="sendOrder()" class="w-full bg-green-500 text-white py-3 rounded-lg font-semibold">
+                            🚀 Enviar Pedido
                         </button>
                     </div>
                 </div>
@@ -811,6 +1050,20 @@
                 price: 19.90,
                 description: 'Brownie de chocolate branco cremoso',
                 image: 'https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true',
+                category: 'sobremesa'
+            },
+            'brownie-nutella': {
+                name: '🍫 Brownie Nutella',
+                price: 19.90,
+                description: 'Brownie com recheio cremoso de Nutella',
+                image: null,
+                category: 'sobremesa'
+            },
+            'brownie-morango': {
+                name: '🍫 Brownie Morango',
+                price: 19.90,
+                description: 'Brownie com cobertura de morango fresco',
+                image: null,
                 category: 'sobremesa'
             },
             
@@ -1168,12 +1421,87 @@
             }
         }
 
-        function sendToWhatsApp() {
+        function openCheckout() {
             if (cart.length === 0) return;
             
-            let message = "🍔 *NOVO PEDIDO - BRAVARI BURGER* 🍔\n\n";
-            let total = 0;
+            const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+            document.getElementById('checkout-total').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+            document.getElementById('final-total').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
             
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+            document.getElementById('checkout-modal').classList.remove('hidden');
+            closeCart();
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+            // Restore body scroll
+            document.body.style.overflow = 'auto';
+        }
+
+        function sendOrder() {
+            if (cart.length === 0) return;
+            
+            const deliveryType = document.querySelector('input[name="delivery-type"]:checked').value;
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+            const customerName = document.getElementById('customer-name').value;
+            const customerPhone = document.getElementById('customer-phone').value;
+            
+            if (!customerName || !customerPhone) {
+                alert('Por favor, preencha seu nome e telefone');
+                return;
+            }
+            
+            let message = "🍔 *NOVO PEDIDO - BRAVARI BURGER* 🍔\n\n";
+            
+            // Customer info
+            message += `👤 *CLIENTE:* ${customerName}\n`;
+            message += `📱 *TELEFONE:* ${customerPhone}\n\n`;
+            
+            // Delivery type
+            if (deliveryType === 'delivery') {
+                const address = document.getElementById('address').value;
+                const neighborhood = document.getElementById('neighborhood').value;
+                const reference = document.getElementById('reference').value;
+                
+                if (!address || !neighborhood) {
+                    alert('Por favor, preencha o endereço completo');
+                    return;
+                }
+                
+                message += `🚚 *ENTREGA:* Delivery\n`;
+                message += `📍 *ENDEREÇO:* ${address}, ${neighborhood}\n`;
+                if (reference) {
+                    message += `🏠 *REFERÊNCIA:* ${reference}\n`;
+                }
+            } else {
+                message += `🏪 *ENTREGA:* Retirar no Local\n`;
+            }
+            
+            // Payment method
+            let paymentText = '';
+            switch(paymentMethod) {
+                case 'pix': paymentText = '📱 PIX'; break;
+                case 'card': paymentText = '💳 Cartão na entrega'; break;
+                case 'money': paymentText = '💵 Dinheiro'; break;
+            }
+            message += `💳 *PAGAMENTO:* ${paymentText}\n`;
+            
+            // Change for money payment
+            if (paymentMethod === 'money') {
+                const moneyAmount = parseFloat(document.getElementById('money-amount').value);
+                const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+                if (moneyAmount && moneyAmount > total) {
+                    const change = moneyAmount - total;
+                    message += `💰 *TROCO PARA:* R$ ${moneyAmount.toFixed(2).replace('.', ',')}\n`;
+                    message += `💰 *TROCO:* R$ ${change.toFixed(2).replace('.', ',')}\n`;
+                }
+            }
+            
+            message += "\n📋 *ITENS DO PEDIDO:*\n\n";
+            
+            let total = 0;
             cart.forEach((item, index) => {
                 message += `${index + 1}. *${item.name}*\n`;
                 message += `   Quantidade: ${item.quantity}\n`;
@@ -1195,7 +1523,7 @@
             });
             
             message += `💰 *TOTAL DO PEDIDO: R$ ${total.toFixed(2).replace('.', ',')}*\n\n`;
-            message += "🍳 *ENVIAR PARA COZINHA* 🍳";
+            message += "🚀 *PEDIDO ENVIADO!*";
             
             const whatsappNumber = "5521959549941";
             const encodedMessage = encodeURIComponent(message);
@@ -1211,6 +1539,73 @@
         window.addEventListener('load', function() {
             initWelcomePopup();
         });
+
+        // Checkout event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Delivery type change
+            document.querySelectorAll('input[name="delivery-type"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const addressSection = document.getElementById('address-section');
+                    if (this.value === 'delivery') {
+                        addressSection.classList.remove('hidden');
+                    } else {
+                        addressSection.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Payment method change
+            document.querySelectorAll('input[name="payment-method"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const changeSection = document.getElementById('change-section');
+                    if (this.value === 'money') {
+                        changeSection.classList.remove('hidden');
+                    } else {
+                        changeSection.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Money amount change
+            document.getElementById('money-amount').addEventListener('input', function() {
+                const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+                const moneyAmount = parseFloat(this.value);
+                const changeAmountEl = document.getElementById('change-amount');
+                
+                if (moneyAmount && moneyAmount >= total) {
+                    const change = moneyAmount - total;
+                    changeAmountEl.textContent = `Troco: R$ ${change.toFixed(2).replace('.', ',')}`;
+                    changeAmountEl.className = 'text-sm text-green-600 mt-2';
+                } else if (moneyAmount) {
+                    changeAmountEl.textContent = 'Valor insuficiente';
+                    changeAmountEl.className = 'text-sm text-red-600 mt-2';
+                } else {
+                    changeAmountEl.textContent = '';
+                }
+            });
+
+            // Crossell option styling
+            document.addEventListener('change', function(e) {
+                if (e.target.classList.contains('crossell')) {
+                    // Remove selected styling from all options in the same group
+                    const groupName = e.target.name;
+                    document.querySelectorAll(`input[name="${groupName}"]`).forEach(input => {
+                        const option = input.closest('.crossell-option');
+                        if (option) {
+                            option.classList.remove('border-brand-red', 'bg-brand-red/5');
+                            option.classList.add('border-gray-200');
+                        }
+                    });
+                    
+                    // Add selected styling to current option
+                    const selectedOption = e.target.closest('.crossell-option');
+                    if (selectedOption && e.target.checked) {
+                        selectedOption.classList.remove('border-gray-200');
+                        selectedOption.classList.add('border-brand-red', 'bg-brand-red/5');
+                    }
+                }
+            });
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c03984b5ef8a83',t:'MTc1NzM1MzE2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c0505742ece10b',t:'MTc1NzM1NDA5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
