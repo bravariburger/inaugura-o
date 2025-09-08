@@ -268,6 +268,40 @@
             border: 0;
         }
         
+        /* Mobile modal centering fixes */
+        @media (max-width: 768px) {
+            .modal-container {
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 1rem !important;
+            }
+            
+            .modal-content {
+                margin: 0 !important;
+                max-height: 85vh !important;
+                width: 100% !important;
+                border-radius: 1rem !important;
+            }
+            
+            /* Prevent viewport jumping on iOS */
+            .modal-open {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+        }
+        
+        /* Floating button positioning fix */
+        @supports (padding: max(0px)) {
+            .floating-cart-fixed {
+                bottom: max(1rem, env(safe-area-inset-bottom)) !important;
+                left: 1rem !important;
+                right: 1rem !important;
+                position: fixed !important;
+            }
+        }
+        
         /* High contrast mode enhancements */
         .high-contrast .product-card {
             border: 3px solid !important;
@@ -909,7 +943,7 @@
     </main>
 
     <!-- Floating Cart Button -->
-    <div id="floating-cart" class="fixed left-4 right-4 z-50 hidden safe-bottom" style="bottom: calc(1rem + env(safe-area-inset-bottom, 0px));">
+    <div id="floating-cart" class="floating-cart-fixed fixed left-4 right-4 z-50 hidden" style="bottom: max(1rem, env(safe-area-inset-bottom, 0px)); padding-bottom: 0;">
         <button onclick="openCart()" class="w-full bg-brand-red text-white py-4 px-6 rounded-full shadow-lg flex items-center justify-center space-x-2 font-semibold transform transition-all duration-200 active:scale-95" role="button" aria-label="Finalizar pedido">
             <span>Finalizar Pedido</span>
             <span id="cart-count" class="bg-brand-yellow text-black px-3 py-1 rounded-full text-sm font-bold min-w-[2rem] text-center">0</span>
@@ -918,8 +952,8 @@
 
     <!-- Product Modal -->
     <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden" onclick="closeProductModal(event)">
-        <div class="fixed inset-0 flex items-end md:items-center justify-center p-4">
-            <div class="bg-white rounded-t-2xl md:rounded-2xl w-full max-w-md max-h-[90vh] md:max-h-[80vh] shadow-2xl transform transition-all duration-300 flex flex-col modal-enter" onclick="event.stopPropagation()">
+        <div class="modal-container fixed inset-0 flex items-center justify-center p-4" style="padding-top: max(1rem, env(safe-area-inset-top)); padding-bottom: max(1rem, env(safe-area-inset-bottom));">
+            <div class="modal-content bg-white rounded-2xl w-full max-w-md max-h-[85vh] shadow-2xl transform transition-all duration-300 flex flex-col modal-enter" onclick="event.stopPropagation()" style="margin-top: 0; margin-bottom: 0;">
                 <div class="flex-1 overflow-y-auto">
                 <div class="p-4 md:p-6">
                     <div class="flex justify-between items-center mb-4 sticky top-0 bg-white z-10 pb-2">
@@ -1122,8 +1156,8 @@
 
     <!-- Cart Modal -->
     <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden">
-        <div class="fixed inset-0 flex items-end md:items-center justify-center p-4">
-            <div class="bg-white rounded-t-2xl md:rounded-2xl w-full max-w-md max-h-[90vh] md:max-h-[80vh] shadow-2xl transform transition-all duration-300 flex flex-col">
+        <div class="modal-container fixed inset-0 flex items-center justify-center p-4" style="padding-top: max(1rem, env(safe-area-inset-top)); padding-bottom: max(1rem, env(safe-area-inset-bottom));">
+            <div class="modal-content bg-white rounded-2xl w-full max-w-md max-h-[85vh] shadow-2xl transform transition-all duration-300 flex flex-col" style="margin-top: 0; margin-bottom: 0;">
                 <div class="flex-1 overflow-y-auto">
                 <div class="p-4 md:p-6">
                     <div class="flex justify-between items-center mb-4 sticky top-0 bg-white z-10 pb-2">
@@ -1179,8 +1213,8 @@
 
     <!-- Checkout Modal -->
     <div id="checkout-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden">
-        <div class="fixed inset-0 flex items-end md:items-center justify-center p-4">
-            <div class="bg-white rounded-t-2xl md:rounded-2xl w-full max-w-md max-h-[90vh] md:max-h-[80vh] shadow-2xl transform transition-all duration-300 flex flex-col">
+        <div class="modal-container fixed inset-0 flex items-center justify-center p-4" style="padding-top: max(1rem, env(safe-area-inset-top)); padding-bottom: max(1rem, env(safe-area-inset-bottom));">
+            <div class="modal-content bg-white rounded-2xl w-full max-w-md max-h-[85vh] shadow-2xl transform transition-all duration-300 flex flex-col" style="margin-top: 0; margin-bottom: 0;">
                 <div class="flex-1 overflow-y-auto">
                     <div class="p-4 md:p-6">
                         <div class="flex justify-between items-center mb-6 sticky top-0 bg-white z-10 pb-2">
@@ -1748,11 +1782,27 @@
             
             // Prevent body scroll and show modal
             document.body.style.overflow = 'hidden';
+            document.body.classList.add('modal-open');
+            
             const modal = document.getElementById('product-modal');
             if (modal) {
                 modal.classList.remove('hidden');
-                // Add focus trap
-                modal.focus();
+                
+                // Force reflow to ensure proper centering on mobile
+                requestAnimationFrame(() => {
+                    const modalContainer = modal.querySelector('.modal-container');
+                    const modalContent = modal.querySelector('.modal-content');
+                    
+                    if (modalContainer && modalContent) {
+                        modalContainer.style.display = 'flex';
+                        modalContainer.style.alignItems = 'center';
+                        modalContainer.style.justifyContent = 'center';
+                        modalContent.style.margin = '0';
+                    }
+                    
+                    // Add focus trap
+                    modal.focus();
+                });
             }
         }
 
@@ -1766,6 +1816,7 @@
             }
             // Restore body scroll
             document.body.style.overflow = '';
+            document.body.classList.remove('modal-open');
         }
         
         function showNotification(message, type = 'success') {
@@ -2089,13 +2140,30 @@
             
             // Prevent body scroll
             document.body.style.overflow = 'hidden';
-            document.getElementById('cart-modal').classList.remove('hidden');
+            document.body.classList.add('modal-open');
+            
+            const cartModal = document.getElementById('cart-modal');
+            cartModal.classList.remove('hidden');
+            
+            // Force proper centering on mobile
+            requestAnimationFrame(() => {
+                const modalContainer = cartModal.querySelector('.modal-container');
+                const modalContent = cartModal.querySelector('.modal-content');
+                
+                if (modalContainer && modalContent) {
+                    modalContainer.style.display = 'flex';
+                    modalContainer.style.alignItems = 'center';
+                    modalContainer.style.justifyContent = 'center';
+                    modalContent.style.margin = '0';
+                }
+            });
         }
 
         function closeCart() {
             document.getElementById('cart-modal').classList.add('hidden');
             // Restore body scroll
             document.body.style.overflow = '';
+            document.body.classList.remove('modal-open');
         }
 
         function removeFromCart(index) {
@@ -2129,7 +2197,24 @@
             
             // Prevent body scroll
             document.body.style.overflow = 'hidden';
-            document.getElementById('checkout-modal').classList.remove('hidden');
+            document.body.classList.add('modal-open');
+            
+            const checkoutModal = document.getElementById('checkout-modal');
+            checkoutModal.classList.remove('hidden');
+            
+            // Force proper centering on mobile
+            requestAnimationFrame(() => {
+                const modalContainer = checkoutModal.querySelector('.modal-container');
+                const modalContent = checkoutModal.querySelector('.modal-content');
+                
+                if (modalContainer && modalContent) {
+                    modalContainer.style.display = 'flex';
+                    modalContainer.style.alignItems = 'center';
+                    modalContainer.style.justifyContent = 'center';
+                    modalContent.style.margin = '0';
+                }
+            });
+            
             closeCart();
         }
 
@@ -2137,6 +2222,7 @@
             document.getElementById('checkout-modal').classList.add('hidden');
             // Restore body scroll
             document.body.style.overflow = '';
+            document.body.classList.remove('modal-open');
         }
 
         // Advanced Validation System
@@ -3249,5 +3335,6 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c16f2c8651cb51',t:'MTc1NzM2NTg0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c18dd7d0568a83',t:'MTc1NzM2NzEwMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
