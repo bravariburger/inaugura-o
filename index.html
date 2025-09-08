@@ -557,12 +557,12 @@
 
     <!-- Product Modal -->
     <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
-        <div class="flex items-end justify-center min-h-screen">
-            <div class="bg-white rounded-t-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
-                <div class="p-4">
-                    <div class="flex justify-between items-center mb-4">
+        <div class="flex items-end md:items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-t-lg md:rounded-lg w-full max-w-md max-h-[95vh] md:max-h-[85vh] overflow-y-auto">
+                <div class="p-4 md:p-6">
+                    <div class="flex justify-between items-center mb-4 sticky top-0 bg-white z-10 pb-2">
                         <h3 id="modal-title" class="text-xl font-bold"></h3>
-                        <button onclick="closeProductModal()" class="text-gray-500 text-2xl">&times;</button>
+                        <button onclick="closeProductModal()" class="text-gray-500 text-2xl hover:text-gray-700 p-1">&times;</button>
                     </div>
                     <img id="modal-image" class="w-full h-48 object-cover rounded-lg mb-4" alt="">
                     <div id="modal-no-image" class="hidden w-full h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
@@ -571,24 +571,7 @@
                     <p id="modal-description" class="text-gray-600 mb-4"></p>
                     <p id="modal-price" class="text-2xl font-bold text-brand-red mb-4"></p>
                     
-                    <!-- Adicionais -->
-                    <div id="adicionais-section" class="mb-4">
-                        <h4 class="font-semibold mb-2">Adicionais:</h4>
-                        <div class="space-y-2">
-                            <label class="flex items-center justify-between">
-                                <span>Bacon Extra (+R$ 3,00)</span>
-                                <input type="checkbox" class="adicional" data-name="Bacon Extra" data-price="3.00">
-                            </label>
-                            <label class="flex items-center justify-between">
-                                <span>Queijo Extra (+R$ 2,50)</span>
-                                <input type="checkbox" class="adicional" data-name="Queijo Extra" data-price="2.50">
-                            </label>
-                            <label class="flex items-center justify-between">
-                                <span>Cebola Roxa (+R$ 1,00)</span>
-                                <input type="checkbox" class="adicional" data-name="Cebola Roxa" data-price="1.00">
-                            </label>
-                        </div>
-                    </div>
+
 
                     <!-- Crossell para Burgers -->
                     <div id="crossell-burgers" class="mb-4 hidden">
@@ -596,15 +579,15 @@
                         <div class="space-y-2">
                             <label class="flex items-center justify-between">
                                 <span>🍟 Batata Frita P (+R$ 19,90)</span>
-                                <input type="checkbox" class="crossell" data-name="Batata Frita P" data-price="19.90">
+                                <input type="radio" name="batata-crossell" class="crossell" data-name="Batata Frita P" data-price="19.90">
                             </label>
                             <label class="flex items-center justify-between">
                                 <span>🍟 Batata Frita M (+R$ 19,90)</span>
-                                <input type="checkbox" class="crossell" data-name="Batata Frita M" data-price="19.90">
+                                <input type="radio" name="batata-crossell" class="crossell" data-name="Batata Frita M" data-price="19.90">
                             </label>
                             <label class="flex items-center justify-between">
                                 <span>🍟 Batata Frita G (+R$ 19,90)</span>
-                                <input type="checkbox" class="crossell" data-name="Batata Frita G" data-price="19.90">
+                                <input type="radio" name="batata-crossell" class="crossell" data-name="Batata Frita G" data-price="19.90">
                             </label>
                         </div>
                         
@@ -612,15 +595,15 @@
                         <div class="space-y-2">
                             <label class="flex items-center justify-between">
                                 <span>Coca Cola 350ml (+R$ 19,90)</span>
-                                <input type="checkbox" class="crossell" data-name="Coca Cola 350ml" data-price="19.90">
+                                <input type="radio" name="bebida-crossell" class="crossell" data-name="Coca Cola 350ml" data-price="19.90">
                             </label>
                             <label class="flex items-center justify-between">
                                 <span>Coca Cola Zero 350ml (+R$ 19,90)</span>
-                                <input type="checkbox" class="crossell" data-name="Coca Cola Zero 350ml" data-price="19.90">
+                                <input type="radio" name="bebida-crossell" class="crossell" data-name="Coca Cola Zero 350ml" data-price="19.90">
                             </label>
                             <label class="flex items-center justify-between">
                                 <span>Guaraná Antártica 350ml (+R$ 19,90)</span>
-                                <input type="checkbox" class="crossell" data-name="Guaraná Antártica 350ml" data-price="19.90">
+                                <input type="radio" name="bebida-crossell" class="crossell" data-name="Guaraná Antártica 350ml" data-price="19.90">
                             </label>
                         </div>
                     </div>
@@ -631,15 +614,15 @@
                         <div class="space-y-2">
                             <label class="flex items-center justify-between">
                                 <span>🍟 Batata P (+R$ 12,90)</span>
-                                <input type="checkbox" class="crossell" data-name="Upgrade Batata P" data-price="12.90">
+                                <input type="radio" name="upgrade-batata" class="crossell" data-name="Upgrade Batata P" data-price="12.90">
                             </label>
                             <label class="flex items-center justify-between">
                                 <span>🍟 Batata M (+R$ 12,90)</span>
-                                <input type="checkbox" class="crossell" data-name="Upgrade Batata M" data-price="12.90">
+                                <input type="radio" name="upgrade-batata" class="crossell" data-name="Upgrade Batata M" data-price="12.90">
                             </label>
                             <label class="flex items-center justify-between">
                                 <span>🍟 Batata G (+R$ 12,90)</span>
-                                <input type="checkbox" class="crossell" data-name="Upgrade Batata G" data-price="12.90">
+                                <input type="radio" name="upgrade-batata" class="crossell" data-name="Upgrade Batata G" data-price="12.90">
                             </label>
                         </div>
                     </div>
@@ -666,22 +649,38 @@
         </div>
     </div>
 
+    <!-- Welcome Popup -->
+    <div id="welcome-popup" class="fixed inset-0 bg-black bg-opacity-50 z-60 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-sm w-full mx-4 p-6 text-center relative">
+            <button onclick="closeWelcomePopup()" class="absolute top-2 right-2 text-gray-500 text-2xl hover:text-gray-700">&times;</button>
+            <div class="mb-4">
+                <span class="text-4xl">🍔</span>
+            </div>
+            <h2 class="text-xl font-bold text-brand-red mb-3">Bem-vindo à inauguração da Bravari Burger!</h2>
+            <p class="text-gray-700 mb-4">Este cardápio com preço especial não é compartilhável!</p>
+            <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                <div id="progress-bar" class="bg-brand-red h-2 rounded-full transition-all duration-100" style="width: 100%"></div>
+            </div>
+            <p class="text-sm text-gray-500">Fechando automaticamente...</p>
+        </div>
+    </div>
+
     <!-- Success Notification -->
-    <div id="success-notification" class="fixed top-20 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300">
-        <div class="flex items-center space-x-2">
+    <div id="success-notification" class="fixed top-20 left-4 right-4 md:left-auto md:right-4 md:w-auto bg-green-500 text-white px-4 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300">
+        <div class="flex items-center justify-center space-x-2">
             <span>✅</span>
-            <span>Produto adicionado ao carrinho!</span>
+            <span class="text-sm md:text-base">Produto adicionado ao carrinho!</span>
         </div>
     </div>
 
     <!-- Cart Modal -->
     <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
-        <div class="flex items-end justify-center min-h-screen">
-            <div class="bg-white rounded-t-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
-                <div class="p-4">
-                    <div class="flex justify-between items-center mb-4">
+        <div class="flex items-end md:items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-t-lg md:rounded-lg w-full max-w-md max-h-[95vh] md:max-h-[85vh] overflow-y-auto">
+                <div class="p-4 md:p-6">
+                    <div class="flex justify-between items-center mb-4 sticky top-0 bg-white z-10 pb-2">
                         <h3 class="text-xl font-bold">Seu Pedido</h3>
-                        <button onclick="closeCart()" class="text-gray-500 text-2xl">&times;</button>
+                        <button onclick="closeCart()" class="text-gray-500 text-2xl hover:text-gray-700 p-1">&times;</button>
                     </div>
                     <div id="cart-items" class="space-y-4 mb-4">
                         <!-- Cart items will be inserted here -->
@@ -1014,7 +1013,6 @@
             // Reset form
             quantity = 1;
             document.getElementById('quantity').textContent = quantity;
-            document.querySelectorAll('.adicional').forEach(cb => cb.checked = false);
             document.querySelectorAll('.crossell').forEach(cb => cb.checked = false);
             document.getElementById('observacoes').value = '';
             
@@ -1040,16 +1038,8 @@
         function addToCart() {
             if (!currentProduct) return;
             
-            const adicionais = [];
             const crossells = [];
             let additionalPrice = 0;
-            
-            document.querySelectorAll('.adicional:checked').forEach(cb => {
-                const name = cb.dataset.name;
-                const price = parseFloat(cb.dataset.price);
-                adicionais.push({ name, price });
-                additionalPrice += price;
-            });
             
             document.querySelectorAll('.crossell:checked').forEach(cb => {
                 const name = cb.dataset.name;
@@ -1066,7 +1056,6 @@
                 name: currentProduct.name,
                 price: currentProduct.price,
                 quantity: quantity,
-                adicionais: adicionais,
                 crossells: crossells,
                 observacoes: observacoes,
                 totalPrice: totalPrice
@@ -1076,6 +1065,26 @@
             updateCartUI();
             showSuccessNotification();
             closeProductModal();
+        }
+
+        function closeWelcomePopup() {
+            document.getElementById('welcome-popup').style.display = 'none';
+        }
+
+        function initWelcomePopup() {
+            const popup = document.getElementById('welcome-popup');
+            const progressBar = document.getElementById('progress-bar');
+            let width = 100;
+            
+            const interval = setInterval(() => {
+                width -= 2;
+                progressBar.style.width = width + '%';
+                
+                if (width <= 0) {
+                    clearInterval(interval);
+                    closeWelcomePopup();
+                }
+            }, 100);
         }
 
         function showSuccessNotification() {
@@ -1111,10 +1120,6 @@
             cart.forEach((item, index) => {
                 total += item.totalPrice;
                 
-                const adicionaisText = item.adicionais.length > 0 
-                    ? item.adicionais.map(a => a.name).join(', ')
-                    : '';
-                
                 const crossellsText = item.crossells && item.crossells.length > 0 
                     ? item.crossells.map(c => c.name).join(', ')
                     : '';
@@ -1125,7 +1130,6 @@
                             <div class="flex-1">
                                 <h4 class="font-semibold">${item.name}</h4>
                                 <p class="text-sm text-gray-600">Qtd: ${item.quantity}</p>
-                                ${adicionaisText ? `<p class="text-sm text-gray-600">Adicionais: ${adicionaisText}</p>` : ''}
                                 ${crossellsText ? `<p class="text-sm text-gray-600">Extras: ${crossellsText}</p>` : ''}
                                 ${item.observacoes ? `<p class="text-sm text-gray-600">Obs: ${item.observacoes}</p>` : ''}
                             </div>
@@ -1167,13 +1171,6 @@
                 message += `   Quantidade: ${item.quantity}\n`;
                 message += `   Preço unitário: R$ ${item.price.toFixed(2).replace('.', ',')}\n`;
                 
-                if (item.adicionais.length > 0) {
-                    message += `   Adicionais:\n`;
-                    item.adicionais.forEach(adicional => {
-                        message += `   • ${adicional.name} (+R$ ${adicional.price.toFixed(2).replace('.', ',')})\n`;
-                    });
-                }
-                
                 if (item.crossells && item.crossells.length > 0) {
                     message += `   Extras:\n`;
                     item.crossells.forEach(crossell => {
@@ -1201,6 +1198,11 @@
 
         // Initialize
         updateCartUI();
+        
+        // Show welcome popup on page load
+        window.addEventListener('load', function() {
+            initWelcomePopup();
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c00f196244e10b',t:'MTc1NzM1MTQyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c02d2827ec8a83',t:'MTc1NzM1MjY1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
