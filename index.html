@@ -2391,10 +2391,19 @@
             const customerName = document.getElementById('customer-name')?.value?.trim();
             const customerPhone = document.getElementById('customer-phone')?.value?.trim();
             
-            // Enhanced validation using ValidationManager
-            if (!validationManager.validateForm()) {
-                showNotification('Por favor, corrija os erros no formulário', 'error');
+            // Simple validation
+            if (!customerName || !customerPhone) {
+                showNotification('Por favor, preencha seu nome e telefone', 'error');
                 return;
+            }
+            
+            if (deliveryType === 'delivery') {
+                const address = document.getElementById('address')?.value?.trim();
+                const neighborhood = document.getElementById('neighborhood')?.value?.trim();
+                if (!address || !neighborhood) {
+                    showNotification('Por favor, preencha o endereço completo', 'error');
+                    return;
+                }
             }
             
             let message = "🍔 *NOVO PEDIDO - BRAVARI BURGER* 🍔\n\n";
@@ -2716,31 +2725,18 @@
             setupErrorHandling() {
                 window.addEventListener('error', (e) => {
                     console.error('Runtime error:', e.error);
-                    this.handleError(e.error);
+                    // Just log errors, don't show popup or reload
                 });
                 
                 window.addEventListener('unhandledrejection', (e) => {
                     console.error('Unhandled promise rejection:', e.reason);
-                    this.handleError(e.reason);
+                    // Just log errors, don't show popup or reload
                 });
             }
             
             handleError(error) {
-                // Show user-friendly error message
-                const errorEl = document.createElement('div');
-                errorEl.className = 'fixed top-4 left-4 right-4 bg-red-500 text-white p-4 rounded-lg z-50 error-shake';
-                errorEl.innerHTML = `
-                    <div class="flex items-center justify-between">
-                        <span>⚠️ Algo deu errado. Recarregando...</span>
-                        <button onclick="this.parentElement.parentElement.remove()" class="text-white">✕</button>
-                    </div>
-                `;
-                document.body.appendChild(errorEl);
-                
-                // Auto-reload after 3 seconds
-                setTimeout(() => {
-                    window.location.reload();
-                }, 3000);
+                // Just log the error, don't show popup or auto-reload
+                console.error('Error handled:', error);
             }
             
             // Cache management
@@ -2838,32 +2834,29 @@
             }
         }
         
-        // Initialize all advanced systems
-        const performanceManager = new PerformanceManager();
-        const imageManager = new ImageManager();
-        const validationManager = new ValidationManager();
-        const securityManager = new SecurityManager();
-        const accessibilityManager = new AccessibilityManager();
-        const analyticsManager = new AnalyticsManager();
+        // Initialize systems safely
+        let performanceManager, imageManager, validationManager, securityManager, accessibilityManager, analyticsManager;
         
         // Enhanced initialization with error handling
         try {
             updateCartUI();
             updateStockDisplay();
             
+            // Initialize advanced systems only if needed
+            try {
+                validationManager = new ValidationManager();
+            } catch (e) {
+                console.log('Validation manager not initialized');
+            }
+            
             // Progressive enhancement
             document.documentElement.classList.remove('no-js');
             
-            // Performance monitoring
-            if ('requestIdleCallback' in window) {
-                requestIdleCallback(() => {
-                    console.log('App initialized successfully');
-                });
-            }
+            console.log('App initialized successfully');
             
         } catch (error) {
             console.error('Initialization error:', error);
-            performanceManager.handleError(error);
+            // Don't auto-reload, just log the error
         }
         
         // Optimized page load handler
@@ -3256,5 +3249,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c1685a048dcb51',t:'MTc1NzM2NTU2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c16f2c8651cb51',t:'MTc1NzM2NTg0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
