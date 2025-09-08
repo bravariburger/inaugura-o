@@ -1034,7 +1034,7 @@
     <script>
         /*
         ========================================
-        CONTROLE DE ESTOQUE - INSTRUÇÕES
+        🔧 CONTROLE DE ESTOQUE - ALTERE AQUI! 🔧
         ========================================
         
         Para alterar o estoque de qualquer produto, procure o produto na lista 'products' abaixo
@@ -1043,16 +1043,19 @@
         Exemplo:
         'cheddar-burger-1': {
             name: '🍔 Cheddar Burguer',
-            price: 19.90,
+            price: 16.90,
             description: '...',
             image: '...',
             category: 'burger',
-            stock: 10  ← ALTERE ESTE NÚMERO
+            stock: 10  ← 🎯 ALTERE ESTE NÚMERO AQUI!
         }
         
-        - stock: 0 = Produto indisponível (aparece como "ESGOTADO")
-        - stock: 1-3 = Estoque baixo (aparece quantidade restante)
-        - stock: 4+ = Estoque normal
+        📊 Como funciona:
+        - stock: 0 = Produto ESGOTADO (não pode ser pedido)
+        - stock: 1-3 = Estoque BAIXO (mostra "X restantes")
+        - stock: 4+ = Estoque NORMAL
+        
+        ⚠️ IMPORTANTE: Altere apenas o número após "stock:"
         
         ========================================
         */
@@ -1082,11 +1085,11 @@
         */
         
         const coupons = {
-            '10OFF': { discount: 10, type: 'percentage', true: true },
-            '15OFF': { discount: 15, type: 'percentage', true: true },
+            '10OFF': { discount: 10, type: 'percentage', active: true },
+            '15OFF': { discount: 15, type: 'percentage', active: true },
             '20OFF': { discount: 20, type: 'percentage', active: true },
-            '30OFF': { discount: 30, type: 'percentage', true: true },
-            'FRETEFREE': { discount: 0, type: 'free_shipping', true: true },
+            '30OFF': { discount: 30, type: 'percentage', active: true },
+            'FRETEFREE': { discount: 0, type: 'free_shipping', active: true },
             'BEBIDAFREE': { discount: 0, type: 'free_drink', active: true }
         };
         
@@ -1100,7 +1103,7 @@
                 description: 'Delicioso burger com queijo cheddar derretido, alface, tomate e molho especial',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Burguer.jpg?raw=true',
                 category: 'burger',
-                stock: 100
+                stock: 10
             },
             'cheddar-bacon-burger-2': {
                 name: '🍔 Cheddar Bacon Burguer',
@@ -1108,7 +1111,7 @@
                 description: 'Burger com cheddar cremoso e bacon crocante, alface, tomate e molho especial',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Bacon%20Burguer.jpg?raw=true',
                 category: 'burger',
-                stock: 100
+                stock: 8
             },
             'bravari-burger-3': {
                 name: '🍔 Bravari Burguer',
@@ -1116,7 +1119,7 @@
                 description: 'Nosso burger especial da casa com ingredientes selecionados',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Bravari%20Burguer.jpg?raw=true',
                 category: 'burger',
-                stock: 100
+                stock: 5
             },
             'cheddar-duplo-4': {
                 name: '🍔 Cheddar Burguer Duplo',
@@ -1124,7 +1127,7 @@
                 description: 'Dupla dose de sabor com cheddar cremoso',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Burguer%20Duplo.jpg?raw=true',
                 category: 'burger',
-                stock: 100
+                stock: 0
             },
             'cheddar-bacon-duplo-5': {
                 name: '🍔 Cheddar Bacon Burguer Duplo',
@@ -1132,7 +1135,7 @@
                 description: 'Duplo prazer com cheddar e bacon crocante',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Bacon%20Burguer%20Duplo.jpg?raw=true',
                 category: 'burger',
-                stock: 100
+                stock: 3
             },
             'bravari-duplo-6': {
                 name: '🍔 Bravari Burguer Duplo',
@@ -1140,7 +1143,7 @@
                 description: 'Versão dupla do nosso especial da casa',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Bravari%20Burguer%20Duplo.jpg?raw=true',
                 category: 'burger',
-                stock: 100
+                stock: 7
             },
             'bravari-bacon-triplo-7': {
                 name: '🍔 Bravari Bacon Triplo',
@@ -1148,7 +1151,7 @@
                 description: 'Tripla dose de sabor com bacon crocante',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Bravari%20Bacon%20Triplo.jpg?raw=true',
                 category: 'burger',
-                stock: 100
+                stock: 2
             },
             'bravari-ring-triplo-8': {
                 name: '🍔 Bravari Ring Triplo',
@@ -1156,7 +1159,7 @@
                 description: 'Triplo burger com onion rings crocantes',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Bravari%20Ring%20Triplo.jpg?raw=true',
                 category: 'burger',
-                stock: 100
+                stock: 4
             },
             'bravari-ring-9': {
                 name: '🍔 Bravari Burguer Ring',
@@ -1164,7 +1167,7 @@
                 description: 'Burger especial com onion rings',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/bravari%20burguer%20ring%20duplo.jpg?raw=true',
                 category: 'burger',
-                stock: 100
+                stock: 6
             },
             'vulcan-burger-10': {
                 name: '🍔 Vulcan Burguer',
@@ -1172,7 +1175,7 @@
                 description: 'Burger picante para os corajosos',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/bravari%20burguer%20ring%20duplo.jpg?raw=true',
                 category: 'burger',
-                stock: 0
+                stock: 1
             },
             'cream-cheese-11': {
                 name: '🍔 Cream Cheese Burguer',
@@ -1180,7 +1183,7 @@
                 description: 'Burger cremoso com cream cheese',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/bravari%20burguer%20ring%20duplo.jpg?raw=true',
                 category: 'burger',
-                stock: 0
+                stock: 9
             },
             'bravari-salada-12': {
                 name: '🍔 Bravari Salada',
@@ -1188,7 +1191,7 @@
                 description: 'Opção saudável com salada fresca',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Bravari%20Salada.jpg?raw=true',
                 category: 'burger',
-                stock: 100
+                stock: 12
             },
             'cheddar-triplo-13': {
                 name: '🍔 Cheddar Burguer Triplo',
@@ -1196,7 +1199,7 @@
                 description: 'Tripla dose de cheddar cremoso',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Burguer%20Triplo.jpg?raw=true',
                 category: 'burger',
-                stock: 100
+                stock: 0
             },
             
             // Sobremesas
@@ -1206,7 +1209,7 @@
                 description: 'Brownie cremoso de chocolate com pedaços de chocolate',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Sobremesas/brownie.jpg?raw=true',
                 category: 'sobremesa',
-                stock: 100
+                stock: 15
             },
             'brownie-branco': {
                 name: '🍫 Brownie Chocolate Branco',
@@ -1214,7 +1217,7 @@
                 description: 'Brownie de chocolate branco cremoso',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Sobremesas/brownie.jpg?raw=true',
                 category: 'sobremesa',
-                stock: 100
+                stock: 8
             },
             'brownie-nutella': {
                 name: '🍫 Brownie Nutella',
@@ -1230,7 +1233,7 @@
                 description: 'Brownie com cobertura de morango fresco',
                 image: null,
                 category: 'sobremesa',
-                stock: 0
+                stock: 6
             },
             
             // Acompanhamentos
@@ -1240,7 +1243,7 @@
                 description: 'Porção pequena de batata frita crocante',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Batatas/batata%20frita.jpg?raw=true',
                 category: 'acompanhamento',
-                stock: 100
+                stock: 20
             },
             'batata-m': {
                 name: '🍟 Batata Frita M',
@@ -1248,7 +1251,7 @@
                 description: 'Porção média de batata frita crocante',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Batatas/batata%20frita.jpg?raw=true',
                 category: 'acompanhamento',
-                stock: 100
+                stock: 15
             },
             'batata-g': {
                 name: '🍟 Batata Frita G',
@@ -1256,7 +1259,7 @@
                 description: 'Porção grande de batata frita crocante',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Batatas/batata%20frita.jpg?raw=true',
                 category: 'acompanhamento',
-                stock: 100
+                stock: 10
             },
             
             // Bebidas
@@ -1266,7 +1269,7 @@
                 description: 'Refrigerante Coca Cola gelado',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Bebidas/coca.jpg?raw=true',
                 category: 'bebida',
-                stock: 100
+                stock: 25
             },
             'coca-zero': {
                 name: 'Coca Cola Zero 350ml',
@@ -1274,7 +1277,7 @@
                 description: 'Refrigerante Coca Cola Zero gelado',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Bebidas/coca%20zero.jpg?raw=true',
                 category: 'bebida',
-                stock: 100
+                stock: 18
             },
             'guarana-antartica': {
                 name: 'Guaraná Antártica 350ml',
@@ -1282,7 +1285,7 @@
                 description: 'Refrigerante Guaraná Antártica gelado',
                 image: 'https://github.com/bravariburger/pedir/blob/main/Bebidas/giuarana%20antartica.jpg?raw=true',
                 category: 'bebida',
-                stock: 0
+                stock: 22
             },
             
             // Combos
@@ -1292,7 +1295,7 @@
                 description: 'Cheddar Burguer + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Cheddar%20Burguer.jpg?raw=true',
                 category: 'combo',
-                stock: 100
+                stock: 12
             },
             'combo-cheddar-bacon-2': {
                 name: '🍔 Combo Cheddar Bacon Burguer',
@@ -1300,7 +1303,7 @@
                 description: 'Cheddar Bacon Burguer + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Cheddar%20Bacon%20Burguer.jpg?raw=true',
                 category: 'combo',
-                stock: 100
+                stock: 8
             },
             'combo-bravari-3': {
                 name: '🍔 Combo Bravari Burguer',
@@ -1308,7 +1311,7 @@
                 description: 'Bravari Burguer + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Bravari%20Burguer.jpg?raw=true',
                 category: 'combo',
-                stock: 100
+                stock: 5
             },
             'combo-cheddar-duplo-4': {
                 name: '🍔 Combo Cheddar Burguer Duplo',
@@ -1316,7 +1319,7 @@
                 description: 'Cheddar Burguer Duplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Cheddar%20Burguer%20Duplo.jpg?raw=true',
                 category: 'combo',
-                stock: 100
+                stock: 0
             },
             'combo-cheddar-bacon-duplo-5': {
                 name: '🍔 Combo Cheddar Bacon Burguer Duplo',
@@ -1324,7 +1327,7 @@
                 description: 'Cheddar Bacon Burguer Duplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Cheddar%20Bacon%20Burguer%20Duplo.jpg?raw=true',
                 category: 'combo',
-                stock: 100
+                stock: 3
             },
             'combo-bravari-duplo-6': {
                 name: '🍔 Combo Bravari Burguer Duplo',
@@ -1332,7 +1335,7 @@
                 description: 'Bravari Burguer Duplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Bravari%20Burguer%20Duplo.jpg?raw=true',
                 category: 'combo',
-                stock: 100
+                stock: 7
             },
             'combo-bravari-bacon-triplo-7': {
                 name: '🍔 Combo Bravari Bacon Triplo',
@@ -1340,7 +1343,7 @@
                 description: 'Bravari Bacon Triplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Bravari%20Bacon%20Triplo.jpg?raw=true',
                 category: 'combo',
-                stock: 100
+                stock: 2
             },
             'combo-bravari-ring-triplo-8': {
                 name: '🍔 Combo Bravari Ring Triplo',
@@ -1348,7 +1351,7 @@
                 description: 'Bravari Ring Triplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Bravari%20Ring%20Triplo.jpg?raw=true',
                 category: 'combo',
-                stock: 100
+                stock: 4
             },
             'combo-bravari-ring-9': {
                 name: '🍔 Combo Bravari Burguer Ring',
@@ -1356,7 +1359,7 @@
                 description: 'Bravari Burguer Ring + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/bravari%20burguer%20ring%20duplo.jpg?raw=true',
                 category: 'combo',
-                stock: 100
+                stock: 6
             },
             'combo-vulcan-10': {
                 name: '🍔 Combo Vulcan Burguer',
@@ -1364,7 +1367,7 @@
                 description: 'Vulcan Burguer + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/bravari%20burguer%20ring%20duplo.jpg?raw=true',
                 category: 'combo',
-                stock: 0
+                stock: 1
             },
             'combo-cream-cheese-11': {
                 name: '🍔 Combo Cream Cheese Burguer',
@@ -1372,7 +1375,7 @@
                 description: 'Cream Cheese Burguer + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/bravari%20burguer%20ring%20duplo.jpg?raw=true',
                 category: 'combo',
-                stock: 0
+                stock: 9
             },
             'combo-bravari-salada-12': {
                 name: '🍔 Combo Bravari Salada',
@@ -1380,7 +1383,7 @@
                 description: 'Bravari Salada + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Bravari%20Burguer.jpg?raw=true',
                 category: 'combo',
-                stock: 100
+                stock: 11
             },
             'combo-cheddar-triplo-13': {
                 name: '🍔 Combo Cheddar Burguer Triplo',
@@ -1388,7 +1391,7 @@
                 description: 'Cheddar Burguer Triplo + Batata Frita + Refrigerante 350ml',
                 image: 'https://github.com/bravariburger/pedir/blob/main/fotos%20dos%20combos%20-%20bravari%20burguer/Cheddar%20Burguer%20Triplo.jpg?raw=true',
                 category: 'combo',
-                stock: 100
+                stock: 0
             }
         };
 
@@ -1603,23 +1606,56 @@
             let totalDiscount = 0;
             let hasFreeShipping = false;
             let hasFreeDrink = false;
+            let discountDetails = [];
             
             appliedCoupons.forEach(coupon => {
                 if (coupon.type === 'percentage') {
-                    totalDiscount += (subtotal * coupon.discount / 100);
+                    const discount = (subtotal * coupon.discount / 100);
+                    totalDiscount += discount;
+                    discountDetails.push({
+                        code: coupon.code,
+                        type: 'percentage',
+                        value: discount,
+                        description: `${coupon.discount}% de desconto`
+                    });
                 } else if (coupon.type === 'free_shipping') {
                     hasFreeShipping = true;
+                    discountDetails.push({
+                        code: coupon.code,
+                        type: 'free_shipping',
+                        value: 0,
+                        description: 'Frete grátis'
+                    });
                 } else if (coupon.type === 'free_drink') {
-                    hasFreeDrink = true;
-                    // Add cheapest drink discount (R$ 7,00)
-                    totalDiscount += 7.00;
+                    // Check if there's a drink in cart and other items
+                    const hasDrink = cart.some(item => products[item.productId] && products[item.productId].category === 'bebida');
+                    const hasOtherItems = cart.some(item => products[item.productId] && products[item.productId].category !== 'bebida');
+                    
+                    if (hasDrink && hasOtherItems) {
+                        hasFreeDrink = true;
+                        totalDiscount += 7.00;
+                        discountDetails.push({
+                            code: coupon.code,
+                            type: 'free_drink',
+                            value: 7.00,
+                            description: 'Bebida grátis'
+                        });
+                    } else {
+                        discountDetails.push({
+                            code: coupon.code,
+                            type: 'free_drink_invalid',
+                            value: 0,
+                            description: 'Bebida grátis (inválido - precisa de bebida + outro item)'
+                        });
+                    }
                 }
             });
             
             return {
                 discount: totalDiscount,
                 hasFreeShipping,
-                hasFreeDrink
+                hasFreeDrink,
+                details: discountDetails
             };
         }
 
@@ -1638,23 +1674,25 @@
             const appliedCouponsEl = document.getElementById('applied-coupons');
             if (appliedCouponsEl) {
                 appliedCouponsEl.innerHTML = '';
-                appliedCoupons.forEach(coupon => {
-                    let description = '';
-                    if (coupon.type === 'percentage') {
-                        description = `${coupon.discount}% de desconto`;
-                    } else if (coupon.type === 'free_shipping') {
-                        description = 'Frete grátis';
-                    } else if (coupon.type === 'free_drink') {
-                        description = 'Bebida grátis';
-                    }
+                
+                // Calculate discount to get details
+                const subtotal = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+                const discountInfo = calculateDiscount(subtotal);
+                
+                discountInfo.details.forEach(detail => {
+                    const isInvalid = detail.type === 'free_drink_invalid';
+                    const bgColor = isInvalid ? 'bg-red-50 border-red-200' : 'bg-green-50 border-green-200';
+                    const textColor = isInvalid ? 'text-red-700' : 'text-green-700';
+                    const descColor = isInvalid ? 'text-red-600' : 'text-green-600';
                     
                     appliedCouponsEl.innerHTML += `
-                        <div class="flex items-center justify-between bg-green-50 border border-green-200 rounded-lg p-2">
+                        <div class="flex items-center justify-between ${bgColor} rounded-lg p-2">
                             <div>
-                                <span class="font-semibold text-green-700">${coupon.code}</span>
-                                <p class="text-xs text-green-600">${description}</p>
+                                <span class="font-semibold ${textColor}">${detail.code}</span>
+                                <p class="text-xs ${descColor}">${detail.description}</p>
+                                ${detail.value > 0 ? `<p class="text-xs ${descColor}">-R$ ${detail.value.toFixed(2).replace('.', ',')}</p>` : ''}
                             </div>
-                            <button onclick="removeCoupon('${coupon.code}')" class="text-red-500 text-sm">✕</button>
+                            <button onclick="removeCoupon('${detail.code}')" class="text-red-500 text-sm">✕</button>
                         </div>
                     `;
                 });
@@ -1744,9 +1782,12 @@
         function openCheckout() {
             if (cart.length === 0) return;
             
-            const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
-            document.getElementById('checkout-total').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
-            document.getElementById('final-total').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+            const subtotal = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+            const discountInfo = calculateDiscount(subtotal);
+            const finalTotal = subtotal - discountInfo.discount;
+            
+            document.getElementById('checkout-total').textContent = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
+            document.getElementById('final-total').textContent = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
             
             // Prevent body scroll
             document.body.style.overflow = 'hidden';
@@ -1811,9 +1852,12 @@
             // Change for money payment
             if (paymentMethod === 'money') {
                 const moneyAmount = parseFloat(document.getElementById('money-amount').value);
-                const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
-                if (moneyAmount && moneyAmount > total) {
-                    const change = moneyAmount - total;
+                const subtotalForChange = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+                const discountInfoForChange = calculateDiscount(subtotalForChange);
+                const finalTotalForChange = subtotalForChange - discountInfoForChange.discount;
+                
+                if (moneyAmount && moneyAmount > finalTotalForChange) {
+                    const change = moneyAmount - finalTotalForChange;
                     message += `💰 *TROCO PARA:* R$ ${moneyAmount.toFixed(2).replace('.', ',')}\n`;
                     message += `💰 *TROCO:* R$ ${change.toFixed(2).replace('.', ',')}\n`;
                 }
@@ -1821,7 +1865,7 @@
             
             message += "\n📋 *ITENS DO PEDIDO:*\n\n";
             
-            let total = 0;
+            let subtotal = 0;
             cart.forEach((item, index) => {
                 message += `${index + 1}. *${item.name}*\n`;
                 message += `   Quantidade: ${item.quantity}\n`;
@@ -1839,10 +1883,32 @@
                 }
                 
                 message += `   Subtotal: R$ ${item.totalPrice.toFixed(2).replace('.', ',')}\n\n`;
-                total += item.totalPrice;
+                subtotal += item.totalPrice;
             });
             
-            message += `💰 *TOTAL DO PEDIDO: R$ ${total.toFixed(2).replace('.', ',')}*\n\n`;
+            // Calculate discount and show details
+            const discountInfo = calculateDiscount(subtotal);
+            
+            message += `💰 *SUBTOTAL: R$ ${subtotal.toFixed(2).replace('.', ',')}*\n`;
+            
+            // Show applied coupons and discounts
+            if (appliedCoupons.length > 0) {
+                message += "\n🎫 *CUPONS APLICADOS:*\n";
+                discountInfo.details.forEach(detail => {
+                    message += `• ${detail.code} - ${detail.description}`;
+                    if (detail.value > 0) {
+                        message += ` (-R$ ${detail.value.toFixed(2).replace('.', ',')})`;
+                    }
+                    message += "\n";
+                });
+                
+                if (discountInfo.discount > 0) {
+                    message += `\n💸 *DESCONTO TOTAL: -R$ ${discountInfo.discount.toFixed(2).replace('.', ',')}*\n`;
+                }
+            }
+            
+            const finalTotal = subtotal - discountInfo.discount;
+            message += `\n💰 *TOTAL FINAL: R$ ${finalTotal.toFixed(2).replace('.', ',')}*\n\n`;
             message += "🚀 *PEDIDO ENVIADO!*";
             
             const whatsappNumber = "5521959549941";
@@ -1923,12 +1989,14 @@
 
             // Money amount change
             document.getElementById('money-amount').addEventListener('input', function() {
-                const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+                const subtotal = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+                const discountInfo = calculateDiscount(subtotal);
+                const finalTotal = subtotal - discountInfo.discount;
                 const moneyAmount = parseFloat(this.value);
                 const changeAmountEl = document.getElementById('change-amount');
                 
-                if (moneyAmount && moneyAmount >= total) {
-                    const change = moneyAmount - total;
+                if (moneyAmount && moneyAmount >= finalTotal) {
+                    const change = moneyAmount - finalTotal;
                     changeAmountEl.textContent = `Troco: R$ ${change.toFixed(2).replace('.', ',')}`;
                     changeAmountEl.className = 'text-sm text-green-600 mt-2';
                 } else if (moneyAmount) {
@@ -1962,6 +2030,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c12bc3f778e10b',t:'MTc1NzM2MzA4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c1463a202d8a83',t:'MTc1NzM2NDE2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
