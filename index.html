@@ -2,7 +2,13 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#DC2626">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Bravari Burger">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
     <title>Bravari Burger - Cardápio Digital</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -18,6 +24,18 @@
         }
     </script>
     <style>
+        /* Performance optimizations */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+        }
+        
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        
         .scrollbar-hide {
             -ms-overflow-style: none;
             scrollbar-width: none;
@@ -25,42 +43,96 @@
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
+        
+        /* Smooth animations */
+        .modal-enter {
+            animation: modalEnter 0.3s ease-out;
+        }
+        
+        @keyframes modalEnter {
+            from {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Loading states */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        /* Better touch targets */
+        button, .cursor-pointer {
+            min-height: 44px;
+            min-width: 44px;
+        }
+        
+        /* Prevent zoom on input focus (iOS) */
+        input, textarea, select {
+            font-size: 16px;
+        }
+        
+        /* Safe area for notched devices */
+        @supports (padding: max(0px)) {
+            .safe-top {
+                padding-top: max(1rem, env(safe-area-inset-top));
+            }
+            .safe-bottom {
+                padding-bottom: max(1rem, env(safe-area-inset-bottom));
+            }
+        }
+        
+        /* Image loading optimization */
+        img {
+            loading: lazy;
+        }
+        
+        /* Prevent overscroll bounce on iOS */
+        body {
+            overscroll-behavior: none;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
-    <header class="bg-brand-red text-white p-4 fixed top-0 left-0 right-0 z-40 shadow-lg">
-        <div class="max-w-4xl mx-auto flex items-center justify-between">
+    <header class="bg-brand-red text-white safe-top fixed top-0 left-0 right-0 z-40 shadow-lg">
+        <div class="max-w-4xl mx-auto flex items-center justify-between p-4">
             <div class="flex items-center space-x-3">
                 <img src="https://github.com/bravariburger/pedir/blob/main/MYSTIC.png?raw=true" 
                      alt="Bravari Burger" 
-                     class="h-10 w-10 rounded-full"
+                     class="h-10 w-10 rounded-full flex-shrink-0"
+                     loading="eager"
                      onerror="this.src=''; this.alt='Logo'; this.style.display='none';">
-                <h1 class="text-xl font-bold">Bravari Burger</h1>
+                <h1 class="text-xl font-bold truncate">Bravari Burger</h1>
             </div>
-            <div class="text-sm">
+            <div class="text-sm flex-shrink-0">
                 <p>Delivery</p>
             </div>
         </div>
     </header>
 
     <!-- Categories Navigation -->
-    <nav class="bg-white shadow-sm fixed top-16 left-0 right-0 z-30 p-4">
+    <nav class="bg-white shadow-sm fixed left-0 right-0 z-30 p-4" style="top: calc(4rem + env(safe-area-inset-top, 0px));">
         <div class="max-w-4xl mx-auto">
-            <div class="flex space-x-4 overflow-x-auto">
-                <button onclick="scrollToCategory('burgers')" class="category-btn bg-brand-red text-white px-4 py-2 rounded-full whitespace-nowrap">
+            <div class="flex space-x-3 overflow-x-auto scrollbar-hide pb-1" style="scroll-snap-type: x mandatory;">
+                <button onclick="scrollToCategory('burgers')" class="category-btn bg-brand-red text-white px-4 py-2 rounded-full whitespace-nowrap flex-shrink-0 transition-all duration-200" style="scroll-snap-align: start;">
                     🍔 Burgers
                 </button>
-                <button onclick="scrollToCategory('sobremesas')" class="category-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full whitespace-nowrap">
+                <button onclick="scrollToCategory('sobremesas')" class="category-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full whitespace-nowrap flex-shrink-0 transition-all duration-200" style="scroll-snap-align: start;">
                     🍫 Sobremesas
                 </button>
-                <button onclick="scrollToCategory('acompanhamentos')" class="category-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full whitespace-nowrap">
+                <button onclick="scrollToCategory('acompanhamentos')" class="category-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full whitespace-nowrap flex-shrink-0 transition-all duration-200" style="scroll-snap-align: start;">
                     🍟 Acompanhamentos
                 </button>
-                <button onclick="scrollToCategory('bebidas')" class="category-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full whitespace-nowrap">
+                <button onclick="scrollToCategory('bebidas')" class="category-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full whitespace-nowrap flex-shrink-0 transition-all duration-200" style="scroll-snap-align: start;">
                     🥤 Bebidas
                 </button>
-                <button onclick="scrollToCategory('combos')" class="category-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full whitespace-nowrap">
+                <button onclick="scrollToCategory('combos')" class="category-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full whitespace-nowrap flex-shrink-0 transition-all duration-200" style="scroll-snap-align: start;">
                     🍔 Combos
                 </button>
             </div>
@@ -68,24 +140,27 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto p-4 pb-24 pt-32">
+    <main class="max-w-4xl mx-auto p-4 pb-24 safe-bottom" style="padding-top: calc(8rem + env(safe-area-inset-top, 0px));">
         <!-- Burgers Category -->
         <section id="burgers" class="mb-8">
             <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 🍔 Burgers
             </h2>
             <div class="grid grid-cols-2 gap-3 md:gap-4">
-                <div class="product-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer" onclick="openProductModal('cheddar-burger-1')">
-                    <img src="https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Burguer.jpg?raw=true" 
-                         alt="Cheddar Burguer" 
-                         class="w-full h-32 object-cover"
-                         onerror="this.src=''; this.parentElement.querySelector('.no-image').style.display='flex';">
-                    <div class="no-image hidden bg-gray-200 h-32 items-center justify-center">
-                        <span class="text-gray-500">📷 Adicionar Foto</span>
+                <div class="product-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-all duration-200 hover:scale-105 active:scale-95" onclick="openProductModal('cheddar-burger-1')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openProductModal('cheddar-burger-1')">
+                    <div class="relative">
+                        <img src="https://github.com/bravariburger/pedir/blob/main/fotos%20burguers%20-%20bravari%20burguer/Cheddar%20Burguer.jpg?raw=true" 
+                             alt="Cheddar Burguer" 
+                             class="w-full h-32 object-cover"
+                             loading="lazy"
+                             onerror="this.style.display='none'; this.parentElement.querySelector('.no-image').style.display='flex';">
+                        <div class="no-image hidden bg-gray-200 h-32 items-center justify-center">
+                            <span class="text-gray-500">📷 Adicionar Foto</span>
+                        </div>
                     </div>
                     <div class="p-4">
-                        <h3 class="font-semibold text-gray-800">🍔 Cheddar Burguer</h3>
-                        <p class="text-sm text-gray-600 mt-1">Delicioso burger com queijo cheddar</p>
+                        <h3 class="font-semibold text-gray-800 line-clamp-1">🍔 Cheddar Burguer</h3>
+                        <p class="text-sm text-gray-600 mt-1 line-clamp-2">Delicioso burger com queijo cheddar</p>
                         <p class="text-brand-red font-bold mt-2">R$ 16,90</p>
                     </div>
                 </div>
@@ -647,17 +722,17 @@
     </main>
 
     <!-- Floating Cart Button -->
-    <div id="floating-cart" class="fixed bottom-4 left-4 right-4 z-50 hidden">
-        <button onclick="openCart()" class="w-full bg-brand-red text-white py-4 px-6 rounded-full shadow-lg flex items-center justify-center space-x-2 font-semibold">
+    <div id="floating-cart" class="fixed left-4 right-4 z-50 hidden safe-bottom" style="bottom: calc(1rem + env(safe-area-inset-bottom, 0px));">
+        <button onclick="openCart()" class="w-full bg-brand-red text-white py-4 px-6 rounded-full shadow-lg flex items-center justify-center space-x-2 font-semibold transform transition-all duration-200 active:scale-95" role="button" aria-label="Finalizar pedido">
             <span>Finalizar Pedido</span>
-            <span id="cart-count" class="bg-brand-yellow text-black px-3 py-1 rounded-full text-sm font-bold">0</span>
+            <span id="cart-count" class="bg-brand-yellow text-black px-3 py-1 rounded-full text-sm font-bold min-w-[2rem] text-center">0</span>
         </button>
     </div>
 
     <!-- Product Modal -->
-    <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden">
+    <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden" onclick="closeProductModal(event)">
         <div class="fixed inset-0 flex items-end md:items-center justify-center p-4">
-            <div class="bg-white rounded-t-2xl md:rounded-2xl w-full max-w-md max-h-[90vh] md:max-h-[80vh] shadow-2xl transform transition-all duration-300 flex flex-col">
+            <div class="bg-white rounded-t-2xl md:rounded-2xl w-full max-w-md max-h-[90vh] md:max-h-[80vh] shadow-2xl transform transition-all duration-300 flex flex-col modal-enter" onclick="event.stopPropagation()">
                 <div class="flex-1 overflow-y-auto">
                 <div class="p-4 md:p-6">
                     <div class="flex justify-between items-center mb-4 sticky top-0 bg-white z-10 pb-2">
@@ -813,18 +888,18 @@
 
                     <!-- Observações -->
                     <div class="mb-4">
-                        <label class="block font-semibold mb-2">Observações:</label>
-                        <textarea id="observacoes" class="w-full p-2 border rounded-lg" rows="3" placeholder="Alguma observação especial?"></textarea>
+                        <label class="block font-semibold mb-2" for="observacoes">Observações:</label>
+                        <textarea id="observacoes" class="w-full p-3 border rounded-lg resize-none" rows="3" placeholder="Alguma observação especial?" maxlength="200"></textarea>
                     </div>
 
                     <!-- Quantity and Add Button -->
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center space-x-3">
-                            <button onclick="decreaseQuantity()" class="bg-gray-200 w-8 h-8 rounded-full">-</button>
-                            <span id="quantity" class="font-bold">1</span>
-                            <button onclick="increaseQuantity()" class="bg-gray-200 w-8 h-8 rounded-full">+</button>
+                    <div class="flex items-center justify-between mb-4 gap-4">
+                        <div class="flex items-center space-x-3 bg-gray-100 rounded-lg p-2">
+                            <button onclick="decreaseQuantity()" class="bg-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow-sm active:scale-95 transition-transform" aria-label="Diminuir quantidade">-</button>
+                            <span id="quantity" class="font-bold text-lg min-w-[2rem] text-center">1</span>
+                            <button onclick="increaseQuantity()" class="bg-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow-sm active:scale-95 transition-transform" aria-label="Aumentar quantidade">+</button>
                         </div>
-                        <button onclick="addToCart()" class="bg-brand-red text-white px-6 py-2 rounded-lg font-semibold">
+                        <button onclick="addToCart()" class="bg-brand-red text-white px-6 py-3 rounded-lg font-semibold flex-1 active:scale-95 transition-transform" id="add-to-cart-btn">
                             Adicionar ao Carrinho
                         </button>
                     </div>
@@ -835,15 +910,15 @@
     </div>
 
     <!-- Welcome Popup -->
-    <div id="welcome-popup" class="fixed inset-0 bg-black bg-opacity-50 z-60 flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg max-w-sm w-full mx-4 p-6 text-center relative">
-            <button onclick="closeWelcomePopup()" class="absolute top-2 right-2 text-gray-500 text-2xl hover:text-gray-700">&times;</button>
+    <div id="welcome-popup" class="fixed inset-0 bg-black bg-opacity-50 z-60 flex items-center justify-center p-4" style="backdrop-filter: blur(2px);">
+        <div class="bg-white rounded-lg max-w-sm w-full mx-4 p-6 text-center relative shadow-2xl modal-enter">
+            <button onclick="closeWelcomePopup()" class="absolute top-3 right-3 text-gray-400 text-xl hover:text-gray-600 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors" aria-label="Fechar">&times;</button>
             <div class="mb-4">
                 <span class="text-4xl">🍔</span>
             </div>
             <h2 class="text-xl font-bold text-brand-red mb-3">Bem-vindo à inauguração da Bravari Burger!</h2>
             <p class="text-gray-700 mb-4">Este cardápio com preço especial não é compartilhável!</p>
-            <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+            <div class="w-full bg-gray-200 rounded-full h-2 mb-4 overflow-hidden">
                 <div id="progress-bar" class="bg-brand-red h-2 rounded-full transition-all duration-100" style="width: 100%"></div>
             </div>
             <p class="text-sm text-gray-500">Fechando automaticamente...</p>
@@ -1396,18 +1471,27 @@
         };
 
         function scrollToCategory(categoryId) {
-            document.getElementById(categoryId).scrollIntoView({ behavior: 'smooth' });
+            const element = document.getElementById(categoryId);
+            if (!element) return;
             
-            // Update active category button
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('bg-brand-red', 'text-white');
-                btn.classList.add('bg-gray-200', 'text-gray-700');
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Update active category button with debouncing
+            requestAnimationFrame(() => {
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('bg-brand-red', 'text-white');
+                    btn.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                event.target.classList.remove('bg-gray-200', 'text-gray-700');
+                event.target.classList.add('bg-brand-red', 'text-white');
             });
-            event.target.classList.remove('bg-gray-200', 'text-gray-700');
-            event.target.classList.add('bg-brand-red', 'text-white');
         }
 
         function openProductModal(productId) {
+            // Prevent double-tap zoom on mobile
+            if (window.lastModalOpen && Date.now() - window.lastModalOpen < 300) return;
+            window.lastModalOpen = Date.now();
+            
             currentProduct = products[productId] || {
                 name: productId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
                 price: 19.90,
@@ -1419,18 +1503,24 @@
             
             // Check if product is out of stock
             if (currentProduct.stock === 0) {
-                alert('Produto indisponível no momento!');
+                showNotification('Produto indisponível no momento!', 'error');
                 return;
             }
             
-            document.getElementById('modal-title').textContent = currentProduct.name;
-            document.getElementById('modal-description').textContent = currentProduct.description;
-            document.getElementById('modal-price').textContent = `R$ ${currentProduct.price.toFixed(2).replace('.', ',')}`;
+            // Update modal content
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const modalPrice = document.getElementById('modal-price');
             
+            if (modalTitle) modalTitle.textContent = currentProduct.name;
+            if (modalDescription) modalDescription.textContent = currentProduct.description;
+            if (modalPrice) modalPrice.textContent = `R$ ${currentProduct.price.toFixed(2).replace('.', ',')}`;
+            
+            // Handle image loading
             const modalImage = document.getElementById('modal-image');
             const modalNoImage = document.getElementById('modal-no-image');
             
-            if (currentProduct.image) {
+            if (currentProduct.image && modalImage && modalNoImage) {
                 modalImage.src = currentProduct.image;
                 modalImage.style.display = 'block';
                 modalNoImage.style.display = 'none';
@@ -1438,7 +1528,7 @@
                     this.style.display = 'none';
                     modalNoImage.style.display = 'flex';
                 };
-            } else {
+            } else if (modalImage && modalNoImage) {
                 modalImage.style.display = 'none';
                 modalNoImage.style.display = 'flex';
             }
@@ -1447,32 +1537,72 @@
             const crossellBurgers = document.getElementById('crossell-burgers');
             const crossellCombos = document.getElementById('crossell-combos');
             
-            if (currentProduct.category === 'burger') {
-                crossellBurgers.classList.remove('hidden');
-                crossellCombos.classList.add('hidden');
-            } else if (currentProduct.category === 'combo') {
-                crossellBurgers.classList.add('hidden');
-                crossellCombos.classList.remove('hidden');
-            } else {
-                crossellBurgers.classList.add('hidden');
-                crossellCombos.classList.add('hidden');
+            if (crossellBurgers && crossellCombos) {
+                if (currentProduct.category === 'burger') {
+                    crossellBurgers.classList.remove('hidden');
+                    crossellCombos.classList.add('hidden');
+                } else if (currentProduct.category === 'combo') {
+                    crossellBurgers.classList.add('hidden');
+                    crossellCombos.classList.remove('hidden');
+                } else {
+                    crossellBurgers.classList.add('hidden');
+                    crossellCombos.classList.add('hidden');
+                }
             }
             
             // Reset form
             quantity = 1;
-            document.getElementById('quantity').textContent = quantity;
-            document.querySelectorAll('.crossell').forEach(cb => cb.checked = false);
-            document.getElementById('observacoes').value = '';
+            const quantityEl = document.getElementById('quantity');
+            if (quantityEl) quantityEl.textContent = quantity;
             
-            // Prevent body scroll
+            document.querySelectorAll('.crossell').forEach(cb => cb.checked = false);
+            const observacoesEl = document.getElementById('observacoes');
+            if (observacoesEl) observacoesEl.value = '';
+            
+            // Prevent body scroll and show modal
             document.body.style.overflow = 'hidden';
-            document.getElementById('product-modal').classList.remove('hidden');
+            const modal = document.getElementById('product-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                // Add focus trap
+                modal.focus();
+            }
         }
 
-        function closeProductModal() {
-            document.getElementById('product-modal').classList.add('hidden');
+        function closeProductModal(event) {
+            // Only close if clicking on backdrop or close button
+            if (event && event.target !== event.currentTarget && !event.target.closest('.close-modal')) return;
+            
+            const modal = document.getElementById('product-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
             // Restore body scroll
             document.body.style.overflow = '';
+        }
+        
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('success-notification');
+            if (!notification) return;
+            
+            const icon = type === 'error' ? '❌' : '✅';
+            const bgColor = type === 'error' ? 'bg-red-500' : 'bg-green-500';
+            
+            notification.className = `fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${bgColor} text-white px-6 py-4 rounded-lg shadow-lg z-50 opacity-0 transition-all duration-300 max-w-xs w-auto`;
+            notification.innerHTML = `
+                <div class="flex items-center justify-center space-x-2">
+                    <span>${icon}</span>
+                    <span class="text-sm font-medium">${message}</span>
+                </div>
+            `;
+            
+            notification.style.opacity = '1';
+            notification.style.transform = 'translate(-50%, -50%) scale(1)';
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translate(-50%, -50%) scale(0.9)';
+            }, 3000);
         }
 
         function increaseQuantity() {
@@ -1490,9 +1620,20 @@
         function addToCart() {
             if (!currentProduct) return;
             
+            // Show loading state
+            const addBtn = document.getElementById('add-to-cart-btn');
+            if (addBtn) {
+                addBtn.classList.add('loading');
+                addBtn.textContent = 'Adicionando...';
+            }
+            
             // Check if there's enough stock
             if (currentProduct.stock < quantity) {
-                alert(`Estoque insuficiente! Apenas ${currentProduct.stock} unidades disponíveis.`);
+                showNotification(`Estoque insuficiente! Apenas ${currentProduct.stock} unidades disponíveis.`, 'error');
+                if (addBtn) {
+                    addBtn.classList.remove('loading');
+                    addBtn.textContent = 'Adicionar ao Carrinho';
+                }
                 return;
             }
             
@@ -1501,16 +1642,17 @@
             
             document.querySelectorAll('.crossell:checked').forEach(cb => {
                 const name = cb.dataset.name;
-                const price = parseFloat(cb.dataset.price);
+                const price = parseFloat(cb.dataset.price) || 0;
                 crossells.push({ name, price });
                 additionalPrice += price;
             });
             
-            const observacoes = document.getElementById('observacoes').value;
+            const observacoesEl = document.getElementById('observacoes');
+            const observacoes = observacoesEl ? observacoesEl.value.trim() : '';
             const totalPrice = (currentProduct.price + additionalPrice) * quantity;
             
             const cartItem = {
-                id: Date.now(),
+                id: Date.now() + Math.random(), // Ensure unique ID
                 name: currentProduct.name,
                 price: currentProduct.price,
                 quantity: quantity,
@@ -1524,10 +1666,19 @@
             currentProduct.stock -= quantity;
             
             cart.push(cartItem);
-            updateCartUI();
-            updateStockDisplay();
-            showSuccessNotification();
-            closeProductModal();
+            
+            // Use requestAnimationFrame for smooth UI updates
+            requestAnimationFrame(() => {
+                updateCartUI();
+                updateStockDisplay();
+                showNotification('Produto adicionado ao carrinho!');
+                closeProductModal();
+                
+                if (addBtn) {
+                    addBtn.classList.remove('loading');
+                    addBtn.textContent = 'Adicionar ao Carrinho';
+                }
+            });
         }
 
         function closeWelcomePopup() {
@@ -1804,13 +1955,29 @@
         function sendOrder() {
             if (cart.length === 0) return;
             
-            const deliveryType = document.querySelector('input[name="delivery-type"]:checked').value;
-            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
-            const customerName = document.getElementById('customer-name').value;
-            const customerPhone = document.getElementById('customer-phone').value;
+            const deliveryType = document.querySelector('input[name="delivery-type"]:checked')?.value;
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked')?.value;
+            const customerName = document.getElementById('customer-name')?.value?.trim();
+            const customerPhone = document.getElementById('customer-phone')?.value?.trim();
             
-            if (!customerName || !customerPhone) {
-                alert('Por favor, preencha seu nome e telefone');
+            // Validation
+            if (!customerName || customerName.length < 2) {
+                showNotification('Por favor, digite seu nome completo', 'error');
+                document.getElementById('customer-name')?.focus();
+                return;
+            }
+            
+            if (!customerPhone || customerPhone.length < 10) {
+                showNotification('Por favor, digite um telefone válido', 'error');
+                document.getElementById('customer-phone')?.focus();
+                return;
+            }
+            
+            // Phone number formatting
+            const phoneRegex = /^[\d\s\(\)\-\+]+$/;
+            if (!phoneRegex.test(customerPhone)) {
+                showNotification('Formato de telefone inválido', 'error');
+                document.getElementById('customer-phone')?.focus();
                 return;
             }
             
@@ -1952,14 +2119,73 @@
             });
         }
 
-        // Initialize
-        updateCartUI();
-        updateStockDisplay();
+        // Debounce function for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
         
-        // Show welcome popup on page load
-        window.addEventListener('load', function() {
+        // Throttle function for scroll events
+        function throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            }
+        }
+        
+        // Initialize with error handling
+        try {
+            updateCartUI();
+            updateStockDisplay();
+        } catch (error) {
+            console.error('Initialization error:', error);
+        }
+        
+        // Optimized page load handler
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initWelcomePopup);
+        } else {
             initWelcomePopup();
+        }
+        
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modals = ['product-modal', 'cart-modal', 'checkout-modal', 'welcome-popup'];
+                modals.forEach(modalId => {
+                    const modal = document.getElementById(modalId);
+                    if (modal && !modal.classList.contains('hidden')) {
+                        if (modalId === 'product-modal') closeProductModal();
+                        else if (modalId === 'cart-modal') closeCart();
+                        else if (modalId === 'checkout-modal') closeCheckout();
+                        else if (modalId === 'welcome-popup') closeWelcomePopup();
+                    }
+                });
+            }
         });
+        
+        // Prevent zoom on double tap (iOS Safari)
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
 
         // Checkout event listeners
         document.addEventListener('DOMContentLoaded', function() {
@@ -2030,5 +2256,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c1463a202d8a83',t:'MTc1NzM2NDE2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c1606eb3decb51',t:'MTc1NzM2NTI0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
